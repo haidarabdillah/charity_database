@@ -12,19 +12,33 @@ Feature yang harus ada :
 10. pembagian grade open donasi
 
 list halaman yang ada
-public :
+list halaman : 
+1. Halaman Beranda:
+    1. Bagian atas halaman menampilkan "Total Dana Terkumpul" dengan informasi jumlah dana yang telah terkumpul dan persentase mencapai target.
+    2. "Proyek Terbaru" menampilkan daftar proyek terbaru yang membutuhkan dukungan donatur.
+    3. "Kisah Sukses" menampilkan kisah-kisah sukses proyek-proyek sebelumnya yang telah berhasil didanai dan selesai.
+    4. "Statistik dan Grafik" memberikan ikhtisar visual tentang seberapa banyak donasi yang telah terkumpul, jumlah donatur yang terlibat, dan perkembangan donasi dari waktu ke waktu.
+    5. "Proyek yang Paling Mendesak" menampilkan proyek-proyek yang paling membutuhkan dukungan dan perhatian donatur saat ini.
+    6. "Testimoni Donatur" memberikan ruang untuk testimoni atau ulasan dari donatur sebelumnya yang telah berpartisipasi dalam proyek-proyek donasi.
+    7. "Kemajuan Proyek" memberikan informasi tentang sejauh mana proyek-proyek telah berkembang dalam mencapai target donasi mereka.
 
-1. dashboard :
-    1. Total Dana Terkumpul: Tampilkan jumlah total dana yang telah terkumpul pada platform donasi tersebut. Ini memberikan gambaran kepada donatur mengenai seberapa jauh target donasi telah tercapai.
-    2. Proyek Terbaru: Tampilkan daftar proyek terbaru yang membutuhkan dukungan donatur. Calon donatur dapat melihat berbagai proyek yang relevan dengan minat atau kepedulian mereka.
-    3. Metode Donasi: Berikan informasi tentang berbagai metode donasi yang tersedia, seperti transfer bank, pembayaran elektronik, atau dompet digital. Sertakan panduan langkah demi langkah tentang cara melakukan donasi melalui setiap metode.
-    4. Kisah Sukses: Tampilkan kisah-kisah sukses mengenai proyek-proyek sebelumnya yang telah berhasil didanai dan selesai. Hal ini memberikan inspirasi dan keyakinan kepada donatur mengenai dampak positif yang dapat dicapai melalui partisipasi mereka.
-    5. Statistik dan Grafik: Tampilkan grafik atau infografis yang memberikan ikhtisar visual tentang seberapa banyak donasi yang telah terkumpul dalam periode waktu tertentu, jumlah donatur yang terlibat, atau perkembangan donasi dari waktu ke waktu. Ini memberikan transparansi dan memotivasi donatur untuk berpartisipasi.
-    6. Proyek Populer atau Terpopuler: Tampilkan proyek-proyek yang paling banyak mendapatkan dukungan atau populer di antara donatur. Ini memberikan indikasi kepada donatur mengenai proyek-proyek yang menarik perhatian orang lain.
-    7. Testimoni Donatur: Berikan ruang untuk testimoni atau ulasan dari donatur sebelumnya yang telah berpartisipasi dalam proyek-proyek donasi. Testimoni ini dapat memberikan kepercayaan kepada donatur dan memotivasi mereka untuk ikut berkontribusi.
-    8. Kemajuan Proyek: Jika proyek-proyek memiliki tingkat kemajuan yang dapat diukur, tampilkan informasi tentang sejauh mana proyek tersebut telah berkembang. Misalnya, jika proyek membutuhkan jumlah tertentu untuk mencapai tahap tertentu, tampilkan persentase kemajuan yang telah dicapai.
+2. Halaman Proyek/Donasi:
+    Elemen yang Penting:
+    - Nama Proyek: Menampilkan nama proyek yang membutuhkan dukungan donatur.
+    - Deskripsi Proyek: Memberikan deskripsi singkat tentang proyek tersebut, menjelaskan tujuan, manfaat, dan dampak yang ingin dicapai.
+    - Jumlah Dana yang Dibutuhkan: Menampilkan jumlah dana yang dibutuhkan untuk mendukung proyek.
+    - Deadline: Menyajikan tanggal atau batas waktu terakhir untuk mengumpulkan dana.
+    - Nama Penggalang Dana: Menampilkan identitas atau nama penggalang dana yang bertanggung jawab atas proyek tersebut.
+    - Status Verifikasi Penggalang Dana: Menampilkan status verifikasi penggalang dana, seperti "Terverifikasi" untuk penggalang dana yang telah diverifikasi oleh platform atau pihak yang berwenang.
 
-2. details donasi
+    Filter yang Penting:
+    - Kategori: Memberikan opsi untuk memfilter proyek berdasarkan kategori tertentu, misalnya bencana alam, pendidikan, kesehatan, dll.
+    - Jumlah Dana yang Dibutuhkan: Memungkinkan pengguna untuk memfilter proyek berdasarkan rentang jumlah dana yang dibutuhkan.
+    - Deadline: Menyediakan filter berdasarkan batas waktu atau tanggal deadline proyek.
+    - Penggalang Dana: Menyediakan opsi untuk memfilter proyek berdasarkan nama atau identitas penggalang dana.
+    - Status Verifikasi Penggalang Dana: Memungkinkan pengguna untuk memfilter proyek berdasarkan status verifikasi penggalang dana, seperti "Terverifikasi" atau "Belum Terverifikasi".
+
+3. Halaman Details Donasi:
     Informasi yang harus disediakan:
     1. Deskripsi Proyek dan Dampak: Deskripsi proyek yang jelas dan dampak positif yang ingin dicapai.
     2. Jumlah Dana yang Dibutuhkan dan Penggunaan Dana: Jumlah dana yang dibutuhkan dan penjelasan mengenai penggunaan dana secara terperinci.
@@ -39,7 +53,17 @@ public :
     4. Nomor Referensi Donasi: Nomor referensi unik untuk setiap donasi yang memungkinkan akses langsung ke informasi donasi.
     5. Login Pengguna: Opsi bagi calon donatur untuk membuat akun dan masuk ke dalam aplikasi untuk melihat riwayat donasi dan menggunakan fitur tracking donasi.
 
-3. details penggalang dana
+4. Halaman Profile Pengguna:
+    1. Profil Pengguna: Menampilkan informasi pengguna seperti nama, foto profil, dan detail kontak.
+    2. Riwayat Donasi: Menampilkan riwayat donasi yang telah dilakukan oleh pengguna, termasuk detail proyek yang didukung, tanggal donasi, dan jumlah donasi.
+    3. Pengaturan Akun: Memungkinkan pengguna untuk mengelola pengaturan akun mereka, seperti mengubah kata sandi, mengatur preferensi notifikasi, atau mengupdate informasi profil.
+    4. Halaman Donasi Saya: Memberikan ringkasan tentang proyek yang didukung oleh pengguna dan status donasi mereka. Pengguna dapat melihat kemajuan proyek, laporan penggunaan dana, atau mengakses informasi terkait donasi mereka.
+    5. Pelacakan Donasi: Memungkinkan pengguna untuk melacak kemajuan donasi mereka, termasuk informasi tentang penggunaan dana, perkembangan proyek, atau laporan keuangan terkait.
+    6. Notifikasi: Menyediakan pemberitahuan kepada pengguna tentang perkembangan terbaru terkait proyek yang mereka dukung, pembaruan donasi, atau informasi penting lainnya.
+    7. Pertanyaan dan Dukungan: Menyediakan informasi kontak atau formulir penghubung untuk pengguna yang memiliki pertanyaan atau membutuhkan dukungan terkait donasi atau akun mereka.
+    8. Pengaturan Privasi: Memungkinkan pengguna untuk mengatur preferensi privasi terkait informasi pribadi mereka dan bagaimana informasi tersebut dapat digunakan.
+
+5. Halaman Profile Penggalang Dana:
     1. Profil Penggalang Dana: Sajikan informasi lengkap mengenai penggalang dana, termasuk nama, logo, gambar, atau video penggalang dana jika tersedia. Jelaskan latar belakang, misi, visi, dan nilai-nilai yang dijunjung tinggi oleh penggalang dana.
     2. Sejarah dan Keberhasilan Sebelumnya: Bagikan sejarah penggalang dana dan keberhasilan sebelumnya dalam melaksanakan proyek-proyek sejenis. Sertakan informasi tentang proyek-proyek sebelumnya yang telah berhasil dicapai, dampak yang telah dihasilkan, dan testimonial dari penerima manfaat atau donatur sebelumnya.
     3. Tujuan dan Rencana Penggalangan Dana: Jelaskan dengan jelas tujuan penggalangan dana saat ini dan rencana penggunaan dana yang diharapkan. Gambarkan bagaimana dana yang terkumpul akan digunakan untuk mencapai tujuan yang telah ditetapkan.
@@ -47,4 +71,14 @@ public :
     5. Keterkaitan dengan Jenis Donasi: Soroti keterkaitan dan kolerasi penggalang dana dengan jenis-jenis donasi tertentu. Jelaskan kategori donasi yang menjadi fokus penggalang dana, persentase atau proporsi donasi yang telah dialokasikan, dan bagikan cerita atau kasus sukses terkait donasi-donasi tersebut.
     6. Kontak dan Informasi Selengkapnya: Sediakan informasi kontak yang lengkap agar calon donatur dapat menghubungi penggalang dana untuk pertanyaan atau klarifikasi lebih lanjut. Juga, berikan tautan atau tombol yang mengarah ke halaman atau sumber lain yang memberikan informasi lebih lanjut tentang penggalang dana jika tersedia.
 
-list halaman private
+6. Halaman Rewards/Loyalitas (opsional):
+   - Menjelaskan program loyalitas atau rewards bagi donatur yang aktif.
+   - Menampilkan poin, penghargaan, atau manfaat yang dapat diperoleh oleh donatur.
+   - Menyediakan informasi tentang cara mengikuti program dan mengklaim hadiah.
+
+7. Halaman News/Update (opsional):
+    1. Proyek: Berita terkait proyek-proyek donasi yang sedang berlangsung, termasuk pembaruan tentang perkembangan proyek, tantangan yang dihadapi, dan upaya yang dilakukan untuk mencapai tujuan proyek.
+    2. Pengumuman: Pengumuman penting dari platform donasi atau penggalang dana, seperti informasi tentang perubahan kebijakan, peluncuran fitur baru, atau kerjasama dengan mitra baru.
+    3. Sukses: Berita tentang proyek-proyek donasi yang telah berhasil mencapai tujuan mereka dan memberikan dampak positif kepada penerima manfaat. Ini mencakup cerita inspiratif tentang bagaimana donasi telah mengubah kehidupan orang-orang.
+    4. Acara: Informasi tentang acara-acara terkait donasi, seperti seminar, webinar, atau kampanye sosial. Hal ini memberikan kesempatan bagi pengguna untuk terlibat secara langsung dalam kegiatan yang mendukung tujuan sosial.
+    5. Tips: Artikel atau panduan praktis yang memberikan tips berguna kepada pengguna tentang cara menjadi donatur yang cerdas, mengelola donasi, atau terlibat dalam kegiatan sosial dengan lebih efektif.
