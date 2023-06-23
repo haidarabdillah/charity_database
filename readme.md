@@ -12,7 +12,8 @@ Feature yang harus ada :
 10. pembagian grade open donasi
 
 list halaman yang ada
-list halaman : 
+list halaman :
+
 1. Halaman Beranda:
     1. Bagian atas halaman menampilkan "Total Dana Terkumpul" dengan informasi jumlah dana yang telah terkumpul dan persentase mencapai target.
     2. "Proyek Terbaru" menampilkan daftar proyek terbaru yang membutuhkan dukungan donatur.

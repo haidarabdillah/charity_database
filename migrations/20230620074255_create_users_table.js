@@ -35,11 +35,28 @@ exports.up = function(knex) {
       table.integer('project_id').unsigned().notNullable();
       table.foreign('project_id').references('projects.id');
       table.timestamps(true, true);
+    })
+    .createTable('payment_methods', function(table) {
+      table.increments('id').primary();
+      table.integer('user_id').unsigned().notNullable();
+      table.foreign('user_id').references('users.id');
+      table.string('method').notNullable();
+      table.timestamps(true, true);
+    })
+    .createTable('transactions', function(table) {
+      table.increments('id').primary();
+      table.integer('user_id').unsigned().notNullable();
+      table.foreign('user_id').references('users.id');
+      table.string('transaction_type').notNullable();
+      table.decimal('amount', 10, 2).notNullable();
+      table.timestamps(true, true);
     });
 };
 
 exports.down = function(knex) {
   return knex.schema
+    .dropTableIfExists('transactions')
+    .dropTableIfExists('payment_methods')
     .dropTableIfExists('donations')
     .dropTableIfExists('projects')
     .dropTableIfExists('users')
