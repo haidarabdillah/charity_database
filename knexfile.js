@@ -12,7 +12,8 @@ module.exports = {
       user: 'root',
       password: 'Sandi123',
       database: 'charity',
-      charset: 'utf8'
+      charset: 'utf8',
+      decimalNumbers: true
     }
   },
 

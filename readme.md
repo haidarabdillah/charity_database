@@ -7,7 +7,7 @@ Feature yang harus ada :
 5. saya bisa donasi dengan crypto dan fiat
 6. saya bisa melihat/membuat kategori donasi
 7. perusahaan bisa menyalurkan dana csr ke sekitar area tertentu
-8. donatur bisa mendapatkan virtual sertifikasi digital
+8. donatur bisa mendapatkan virtual sertifikst digital
 9. kerja sama dengan dinas sosial
 10. pembagian grade open donasi
 
