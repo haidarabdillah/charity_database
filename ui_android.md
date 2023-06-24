@@ -23,6 +23,22 @@ ___
     - news
 - Dark/Light Mode
 
+## AUTH
+
+1. Register
+   - user memasukan nomor hp
+   - user mendapatkan code HP
+   - user verifikasi code Hp
+   - user memasukan password dan confirmation password
+2. Login
+   - user memasukan nomor Hp
+   - user memasukan password
+3. Reset Password
+   - user memasukan nomor hp
+   - user mendapatkan code HP
+   - user verifikasi code Hp
+   - user memasukan password dan confirmation password
+
 ## Navigation
 
 - [Home](#1-home)
@@ -112,8 +128,6 @@ Beranda dari platform _Satu Nusa_ harus memberikan informasi yang cukup tentang 
          - biaya pembelian popok =  500.000
          - total =  700.000
 
-
-
 ### 4 Settings
 
    1. Profil Pengguna: Menampilkan informasi pengguna seperti nama, foto profil, dan NOmor Hp serta  mengupdate informasi profil
@@ -148,19 +162,19 @@ ___
    1. Banner maksimal 5 banner
    2. penggalang dana (status verifikasi : verified user, organisasi/yayasan official), jika di klik mengarah kehalaman details penggalang
    3. button donasi
-      - ketika user berinterasi, muncul popup form input dengan forrmat : 
+      - ketika user berinterasi, muncul popup form input dengan forrmat :
       - nominal, bisa milih semua balance, bisa milih minimal donasi, bisa input nominal donasi
    4. tab :
       - details dari campaign tersebut
-      - rincian Dana : 
-         - kebuthan dana dengan rincianya 
+      - rincian Dana :
+         - kebuthan dana dengan rincianya
          - total dana terkumpul
          - dana yang sudah di cairkan
             - total yang dicairkan
             - sumbangan pengembangan platform
             - sisa balance yang belum dicairkan
          - history/timeline pencairan dana dengan keterangan update penggunaanya (disini hanya deskripsi singkat, jika di klik detals akan masuk ke halaman update/kabar terbaru campaign)
-      - update/kabar terbaru, dengan kategori : 
+      - update/kabar terbaru, dengan kategori :
          - penyaluran
          - berita
          - pencairan dana
