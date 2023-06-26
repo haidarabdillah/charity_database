@@ -12,6 +12,45 @@ exports.up = function (knex) {
       table.timestamps(true, true);
     })
 
+    // Tabel "payment_methods" untuk menyimpan daftar bank yang valid untuk deposit dan withdrawal
+    .createTable('payment_methods', function (table) {
+      table.increments('id').primary();
+      table.string('method_code');
+      table.enum('method_type', ['bank', 'e-wallet']);
+      table.decimal('minimum_deposit');
+      table.decimal('minimum_withdrawal');
+      table.boolean('enable_deposit').defaultTo(true);
+      table.boolean('enable_withdrawal').defaultTo(true);
+      table.string('url_log');
+    })
+
+    .createTable('deposit_methode', function (table) {
+      table.increments('id').primary();
+      table.integer('user_id').unsigned().references('users.id');
+      table.integer('payment_methods_id').unsigned().references('payment_methods.bank_id');
+      table.string('external_id');
+      table.string('account_number');
+      table.string('name');
+      table.string('status');
+      table.dateTime('expiration_date');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+
+
+    .createTable('deposit_history', function (table) {
+      table.increments('id').primary();
+      table.integer('user_id').unsigned().notNullable();
+      table.integer('payment_method_id').unsigned().notNullable();
+      table.decimal('amount').notNullable();
+      table.timestamp('timestamp').defaultTo(knex.fn.now());
+      table.string('virtual_account_id').notNullable();
+      table.enum('status', ['pending', 'success', 'failed']).defaultTo('pending');
+      table.string('external_id_transaction');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+
     .createTable('kyc_personal', (table) => {
       table.increments('kyc_id').primary();
       table.integer('user_id').unsigned().references('users.user_id');
@@ -47,46 +86,42 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-    // Tabel "banks" untuk menyimpan informasi bank account
-    .createTable('banks', (table) => {
+    // Tabel "banks" untuk menyimpan informasi bank account users untuk wd
+    .createTable('fundraiser_bank_accounts', (table) => {
       table.increments('bank_id').primary();
       table.string('account_number');
       table.integer('user_id').unsigned().references('users.user_id');
       table.boolean('is_verified').defaultTo(false);
-      table.integer('bank_id').unsigned().references('bank_list.bank_id');
+      table.integer('payment_methods_id').unsigned().references('payment_methods.bank_id');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
 
-    // Tabel "bank_list" untuk menyimpan daftar bank yang valid
-    .createTable('bank_list', (table) => {
-      table.increments('bank_id').primary();
-      table.string('bank_name');
-      table.string('logo_url');
+    // Skema untuk tabel fundraiser_contacts
+    .createTable('fundraiser_contacts', function (table) {
+      table.increments('id').primary();
+      table.integer('user_id').unsigned().references('id').inTable('users');
+      table.string('website');
+      table.string('instagram');
+      table.string('youtube');
+      table.string('facebook');
+      table.string('twitter');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-    .createTable('fixed_virtual_accounts', function(table) {
+    // Skema untuk tabel fundraiser_profile
+    .createTable('fundraiser_profile', function (table) {
       table.increments('id').primary();
-      table.integer('user_id').unsigned().references('users.id');
-      table.integer('bank_account_id').unsigned().references('bank_accounts.id');
-      table.string('external_id');
-      table.string('bank_code');
-      table.string('name');
-      table.decimal('fixed_amount');
-      table.string('status');
-      table.dateTime('expiration_date');
+      table.integer('user_id').unsigned().references('id').inTable('users');
+      table.string('profile_picture_url');
+      table.string('vision_mission');
+      table.string('background');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-
-    .createTable('allowed_deposit_methods', function(table) {
-      table.increments('id').primary();
-      table.string('method_code');
-      table.enum('method_type', ['bank', 'e-wallet']);
-      table.decimal('minimum_deposit');
-    })
 
 
     .createTable('campaigns', function (table) {
@@ -100,6 +135,9 @@ exports.up = function (knex) {
       table.foreign('category_id').references('categories.id');
       table.timestamps(true, true);
     })
+
+
+
     .createTable('categories', function (table) {
       table.increments('id').primary();
       table.string('name').notNullable();
@@ -116,21 +154,6 @@ exports.up = function (knex) {
       table.foreign('project_id').references('campaigns.id');
       table.timestamps(true, true);
     })
-    .createTable('payment_methods', function (table) {
-      table.increments('id').primary();
-      table.integer('user_id').unsigned().notNullable();
-      table.foreign('user_id').references('users.id');
-      table.string('method').notNullable();
-      table.timestamps(true, true);
-    })
-    .createTable('transactions', function (table) {
-      table.increments('id').primary();
-      table.integer('user_id').unsigned().notNullable();
-      table.foreign('user_id').references('users.id');
-      table.string('transaction_type').notNullable();
-      table.decimal('amount', 10, 2).notNullable();
-      table.timestamps(true, true);
-    });
 };
 
 exports.down = function (knex) {
