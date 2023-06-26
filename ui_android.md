@@ -142,7 +142,7 @@ Beranda dari platform _Satu Nusa_ harus memberikan informasi yang cukup tentang 
       - campaign (update dari campaign yang diikuti)
       - news
    7. Pertanyaan dan Dukungan: Menyediakan informasi kontak atau formulir penghubung untuk pengguna yang memiliki pertanyaan atau membutuhkan dukungan terkait donasi atau akun mereka.
-   8. Pengaturan Privasi: Memungkinkan pengguna untuk mengatur preferensi privasi terkait informasi pribadi mereka dan bagaimana informasi tersebut dapat digunakan.
+   8. Pengaturan Privasi: Memungkinkan pengguna untuk mengatur preferensi privasi terkait informasi pribadi mereka, dengan opsi menampilkan nama pengguna ketika berdonasi
 
 ___
 
