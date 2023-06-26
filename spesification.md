@@ -16,6 +16,7 @@ spesification for service system :
 -- Latency
     - on chain dan offchain data
     - 1 server only no backup manager
+    - database backup management
 -- Throughput
     - 100RPs cukup dengan 1 server dan 3 load balancer (callback payment methode harus running terpisah dari sini)
     - websocket for realtime data

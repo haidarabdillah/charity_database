@@ -2,8 +2,10 @@
 
 ## 1. Resgister
 
-### *Register - Meminta Kode Verifikasi*
+<details>
+<summary><strong>Register - Meminta Kode Verifikasi</strong></summary>
 
+Details Register - Meminta Kode Verifikasi <br>
 **Endpoint:** POST /api/register/request-verification-code
 
 Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang telah diinput oleh pengguna.
@@ -33,9 +35,10 @@ Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang 
 }
 ```
 
-Berikut adalah contoh implementasi endpoint untuk verifikasi kode pada proses registrasi:
+  </details>
 
-### *Register - verify Kode Verifikasi*
+<details>
+<summary><strong>Register - verify Kode Verifikasi</strong></summary>
 
 **Endpoint:** POST /api/register-verify-code
 
@@ -67,7 +70,10 @@ Endpoint ini digunakan untuk memverifikasi kode yang dikirimkan ke nomor HP peng
 }
 ```
 
-### *Register - Kirim Kode Verifikasi dan Password*
+  </details>
+
+<details>
+<summary><strong>Register - Kirim Kode Verifikasi dan Password</strong></summary>
 
 **Endpoint:** POST /api/register/verify-and-set-password
 
@@ -104,7 +110,12 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
 
 ```
 
+</details>
+
 ## 2. Login
+
+<details>
+<summary><strong>Login - standart user login</strong></summary>
 
 **Endpoint:** POST /api/login
 
@@ -137,9 +148,12 @@ Endpoint ini digunakan untuk melakukan proses login pengguna.
 }
 ```
 
+  </details>
+
 ## 3. Forgot Password
 
-### *Forgot - Meminta Kode Verifikasi*
+<details>
+<summary><strong>Forgot - Meminta Kode Verifikasi</strong></summary>
 
 **Endpoint:** POST /api/register/request-forgot-code
 
@@ -170,7 +184,9 @@ Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang 
 }
 ```
 
-### *Forgot - Kirim Kode Verifikasi dan Password*
+  </details>
+<details>
+<summary><strong>Forgot - Kirim Kode Verifikasi dan Password</strong></summary>
 
 **Endpoint:** POST /api/register/forgot-and-set-password
 
@@ -206,3 +222,177 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
 }
 
 ```
+
+  </details>
+
+## 4. Dashboard
+
+<details>
+<summary><strong> get dashboard data</strong></summary>
+
+**Endpoint: GET /dashboard**
+
+**Response:**
+
+```json
+{
+  "banners": [
+    {
+      "image": "https://example.com/banner1.jpg",
+      "donation_id": 2
+    },
+    {
+      "image": "https://example.com/banner2.jpg",
+      "donation_id": 3
+    },
+    {
+      "image": "https://example.com/banner3.jpg",
+      "donation_id": 23
+    },
+    {
+      "image": "https://example.com/banner4.jpg",
+      "donation_id": 12
+    },
+    {
+      "image": "https://example.com/banner5.jpg",
+      "donation_id": 4
+    }
+  ],
+  "statistics": {
+    "total_donations": 1500,
+    "total_donatur": 500,
+    "total_campaigns": 100
+  },
+  "urgentCampaigns": [
+    {
+      "title": "Campaign 3",
+      "donation_needed": 10000,
+      "deadline": "2023-06-30",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "fundraiser_name": "Fundraiser 3",
+      "fundraiser_status": "org",
+      "fundraiser_id": 3,
+      "donation_id": 1,
+      "total_donation_needed": 50000,
+      "total_conation_received": 25000
+    },
+    {
+      "title": "Campaign 4",
+      "donation_needed": 8000,
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "deadline": "2023-07-10",
+      "fundraiser_name": "Fundraiser 4",
+      "fundraiser_status": "personal",      "geo_location":{
+          "latitude": 123.456,
+          "longitude": 987.654,
+          "kelurahan":"nama desa",
+          "kecamatan":"nama kecamatan",
+          "kota":"nama kota", // kabupaten
+          "provinsi":"nama provinsi" // provinsi
+      }
+
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
+    }
+  ],
+  "testimonials": [
+    {
+      "donorName": "Donor 1",
+      "donationAmount": 100,
+      "comment": "Great campaign!",
+      "donation_id":4
+    },
+    {
+      "donorName": "Donor 2",
+      "donationAmount": 50,
+      "comment": "Happy to contribute!",
+      "donation_id": 4
+    }
+  ],
+  "news": [
+    {
+      "type": "campaign",
+      "creator": "Fundraiser 4",
+      "tittle": "Update Pendistribusian dana ",
+      "content": "Campaign 1 has reached 50% of its donation target.",
+      "link_id": 2
+    },
+    {
+      "type": "news",
+      "creator": "Admin",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "content": "dengan berdonasi ke tetangga kita bisa mendapatkan hikmah secara langsung yaitu ..... ",
+      "link_id": 323
+    }
+  ]
+}
+```
+
+  </details>
+
+<details>
+<summary><strong> get dashboard data</strong></summary>
+
+**Endpoint: POST /campaigns/nearby**
+
+**Request Body:**
+
+```json
+{
+  "latitude": 123.456,
+  "longitude": 987.654
+}
+```
+
+Endpoint ini digunakan untuk mengirimkan data geolocation pengguna. dan mendapatkan donasi disekitar pengguna
+
+**Response:**
+
+```json
+ [
+   {
+     "title": "Campaign 3",
+      "donation_needed": 10000,
+      "deadline": "2023-06-30",
+      "fundraiser_name": "Fundraiser 3",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "fundraiser_status": "org",
+      "fundraiser_id": 3,
+      "donation_id": 1,
+      "total_donation_needed": 50000,
+      "total_conation_received": 25000,
+      "geo_location":{
+          "latitude": 123.456,
+          "longitude": 987.654,
+          "kelurahan":"nama desa",
+          "kecamatan":"nama kecamatan",
+          "kota":"nama kota", // kabupaten
+          "provinsi":"nama provinsi" // provinsi
+      }
+    },
+    {
+      "title": "Campaign 4",
+      "donation_needed": 8000,
+      "deadline": "2023-07-10",
+      "fundraiser_name": "Fundraiser 4",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "fundraiser_status": "personal",
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000,
+            "geo_location":{
+          "latitude": 123.456,
+          "longitude": 987.654,
+          "kelurahan":"nama desa",
+          "kecamatan":"nama kecamatan",
+          "kota":"nama kota", // kabupaten
+          "provinsi":"nama provinsi" // provinsi
+      }
+    }
+  ],
+```
+
+</details>
