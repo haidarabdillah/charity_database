@@ -135,7 +135,6 @@ Beranda dari platform _Satu Nusa_ harus memberikan informasi yang cukup tentang 
    4. Donasi Saya:
       - List Donasi yang di dukung (komponen [list](#list-donasi))
       - history Donasi (komponen [Testimoni donasi](#tes))
-      - Pelacakan Donasi : Memungkinkan pengguna untuk melacak kemajuan donasi mereka, termasuk informasi tentang penggunaan dana, perkembangan campaign, atau laporan keuangan terkait. seperti berita terkait update terbaru dari
    6. Notifikasi: Menyediakan pemberitahuan kepada pengguna tentang perkembangan terbaru terkait campaign yang mereka dukung, pembaruan donasi, atau informasi penting lainnya, dengan kategori :
       - transaksi (deposit, donasi)
       - campaign (update dari campaign yang diikuti)
@@ -165,6 +164,7 @@ ___
    3. button donasi
       - ketika user berinterasi, muncul popup form input dengan forrmat :
       - nominal, bisa milih semua balance, bisa milih minimal donasi, bisa input nominal donasi
+   4. tombol share
    4. tab :
       - details dari campaign tersebut
       - rincian Dana :
