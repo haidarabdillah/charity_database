@@ -179,6 +179,15 @@ exports.up = function (knex) {
       table.timestamp('created_at').defaultto(knex.fn.now());
       table.timestamp('updated_at').defaultto(knex.fn.now());
     })
+
+    .createTable('statistics', function (table) {
+      table.increments('id').primary();
+      table.integer('total_donations').defaultTo(0);
+      table.integer('total_donors').defaultTo(0);
+      table.integer('total_campaigns').defaultTo(0);
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+    
 };
 exports.down = function (knex) {
   return knex.schema
@@ -196,5 +205,6 @@ exports.down = function (knex) {
     .dropTableIfExists('deposit_history')
     .dropTableIfExists('deposit_methods')
     .dropTableIfExists('payment_methods')
-    .dropTableIfExists('users');
+    .dropTableIfExists('users')
+    .dropTableIfExists('statistics')
 };
