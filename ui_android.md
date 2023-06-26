@@ -86,7 +86,6 @@ Beranda dari platform _Satu Nusa_ harus memberikan informasi yang cukup tentang 
    - Jumlah Dana yang Dibutuhkan: Memungkinkan pengguna untuk memfilter campaign berdasarkan rentang jumlah dana yang dibutuhkan.
    - Deadline: Menyediakan filter berdasarkan batas waktu atau tanggal deadline campaign.
    - Penggalang Dana: Menyediakan opsi untuk memfilter campaign berdasarkan status penggalang dana, personal/yayasan
-   - Status Verifikasi Penggalang Dana: Memungkinkan pengguna untuk memfilter campaign berdasarkan status verifikasi penggalang dana, seperti "Terverifikasi" atau "Belum Terverifikasi".
 
 2. Donasi (berdasarkan Kategori yang di pilih)
    - list donasi berdasarkan komponen [donasi](#list-donasi)
