@@ -9,7 +9,8 @@ exports.up = function (knex) {
       table.string('password_hash');
       table.decimal('balance', 10, 2).defaultTo(0);
       table.boolean('is_fundraiser').defaultTo(false);
-      table.timestamps(true, true);
+      table.timestamp('created_at').defaultto(knex.fn.now());
+      table.timestamp('updated_at').defaultto(knex.fn.now());
     })
 
     // Tabel "payment_methods" untuk menyimpan daftar bank yang valid untuk deposit dan withdrawal
@@ -51,9 +52,21 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-    .createTable('kyc_personal', (table) => {
+    // Skema untuk tabel fundraiser_profile
+    .createTable('fundraiser_profile', function (table) {
+      table.increments('id').primary();
+      table.integer('user_id').unsigned().references('id').inTable('users');
+      table.string('profile_picture_url');
+      table.string('vision_mission');
+      table.string('background');
+      table.enum('verified', ['pending', 'personal', 'org']).defaultTo('pending');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+
+    .createTable('fundraiser_kyc_personal', (table) => {
       table.increments('kyc_id').primary();
-      table.integer('user_id').unsigned().references('users.user_id');
+      table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
       table.string('full_name');
       table.string('id_number');
       table.string('address');
@@ -61,13 +74,14 @@ exports.up = function (knex) {
       table.string('photo_id_back');
       table.string('selfie_photo');
       table.enum('verification_status', ['pending', 'approved', 'rejected']).defaultTo('pending');
-      table.timestamps(true, true);
+      table.timestamp('created_at').defaultto(knex.fn.now());
+      table.timestamp('updated_at').defaultto(knex.fn.now());
     })
 
     // Tabel "kyc_org" untuk menyimpan data KYC organisasi (lembaga penyalur donasi)
-    .createTable('kyc_org', (table) => {
+    .createTable('fundraiser_kyc_org', (table) => {
       table.increments('kyc_id').primary();
-      table.integer('user_id').unsigned().references('users.user_id');
+      table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
       table.string('org_name');
       table.string('tax_id');
       table.string('registration_number');
@@ -90,7 +104,7 @@ exports.up = function (knex) {
     .createTable('fundraiser_bank_accounts', (table) => {
       table.increments('bank_id').primary();
       table.string('account_number');
-      table.integer('user_id').unsigned().references('users.user_id');
+      table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
       table.boolean('is_verified').defaultTo(false);
       table.integer('payment_methods_id').unsigned().references('payment_methods.bank_id');
       table.timestamp('created_at').defaultTo(knex.fn.now());
@@ -111,57 +125,76 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-    // Skema untuk tabel fundraiser_profile
-    .createTable('fundraiser_profile', function (table) {
+
+    .createTable('fundraiser_withdrawals', function (table) {
       table.increments('id').primary();
-      table.integer('user_id').unsigned().references('id').inTable('users');
-      table.string('profile_picture_url');
-      table.string('vision_mission');
-      table.string('background');
+      table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
+      table.integer('campaigns_id').unsigned().references('id').inTable('campaigns');
+      table.decimal('amount', 10, 2).notNullable();
+      table.string('status').notNullable();
+      table.timestamp('requested_at').defaultTo(knex.fn.now());
+      table.timestamp('completed_at');
+      table.string('external_id_transaction');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
-
 
 
     .createTable('campaigns', function (table) {
       table.increments('id').primary();
       table.string('title').notNullable();
       table.text('description').notNullable();
-      table.decimal('target_amount', 10, 2).notNullable();
-      table.integer('fundraiser_id').unsigned().nullable();
-      table.foreign('fundraiser_id').references('users.id');
-      table.integer('category_id').unsigned().notNullable();
-      table.foreign('category_id').references('categories.id');
-      table.timestamps(true, true);
+      table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
+      table.decimal('required_amount', 10, 2).notNullable();
+      table.decimal('total_collected_amount', 10, 2).notNullable();
+      table.decimal('total_withdrawn_amount', 10, 2).notNullable();
+      table.integer('category_id').unsigned().references('id').inTable('categories');
+      table.timestamp('created_at').defaultto(knex.fn.now());
+      table.timestamp('updated_at').defaultto(knex.fn.now());
     })
-
-
 
     .createTable('categories', function (table) {
       table.increments('id').primary();
       table.string('name').notNullable();
-      table.integer('parent_category_id').unsigned().nullable();
-      table.foreign('parent_category_id').references('categories.id');
-      table.timestamps(true, true);
+      table.timestamp('created_at').defaultto(knex.fn.now());
+      table.timestamp('updated_at').defaultto(knex.fn.now());
     })
+
+    .createTable('campaign_updates', function (table) {
+      table.increments('id').primary();
+      table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
+      table.enum('update_type', ['penyaluran', 'berita', 'withdraw']).notNullable();
+      table.text('update_description').notNullable();
+      table.integer('fundraiser_withdrawal_id').unsigned().references('id').inTable('fundraiser_withdrawal_transactions').onDelete('SET NULL');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+
     .createTable('donations', function (table) {
       table.increments('id').primary();
       table.decimal('amount', 10, 2).notNullable();
-      table.integer('donor_id').unsigned().notNullable();
-      table.foreign('donor_id').references('users.id');
-      table.integer('project_id').unsigned().notNullable();
-      table.foreign('project_id').references('campaigns.id');
-      table.timestamps(true, true);
+      table.integer('donor_id').unsigned().notNullable().references('id').inTable('users');
+      table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
+      table.text('comment');
+      table.timestamp('created_at').defaultto(knex.fn.now());
+      table.timestamp('updated_at').defaultto(knex.fn.now());
     })
 };
-
 exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists('transactions')
-    .dropTableIfExists('payment_methods')
     .dropTableIfExists('donations')
+    .dropTableIfExists('campaign_updates')
+    .dropTableIfExists('categories')
     .dropTableIfExists('campaigns')
-    .dropTableIfExists('users')
-    .dropTableIfExists('categories');
+    .dropTableIfExists('fundraiser_withdrawals')
+    .dropTableIfExists('fundraiser_contacts')
+    .dropTableIfExists('fundraiser_bank_accounts')
+    .dropTableIfExists('kyc_org_documents')
+    .dropTableIfExists('fundraiser_kyc_org')
+    .dropTableIfExists('fundraiser_kyc_personal')
+    .dropTableIfExists('fundraiser_profile')
+    .dropTableIfExists('deposit_history')
+    .dropTableIfExists('deposit_methode')
+    .dropTableIfExists('payment_methods')
+    .dropTableIfExists('users');
 };
