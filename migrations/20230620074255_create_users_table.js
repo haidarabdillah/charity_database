@@ -25,7 +25,7 @@ exports.up = function (knex) {
       table.string('url_log');
     })
 
-    .createTable('deposit_methode', function (table) {
+    .createTable('deposit_methods', function (table) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().references('users.id');
       table.integer('payment_methods_id').unsigned().references('payment_methods.bank_id');
@@ -194,7 +194,7 @@ exports.down = function (knex) {
     .dropTableIfExists('fundraiser_kyc_personal')
     .dropTableIfExists('fundraiser_profile')
     .dropTableIfExists('deposit_history')
-    .dropTableIfExists('deposit_methode')
+    .dropTableIfExists('deposit_methods')
     .dropTableIfExists('payment_methods')
     .dropTableIfExists('users');
 };
