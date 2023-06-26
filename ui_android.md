@@ -154,6 +154,8 @@ ___
 3. Deadline: Menyajikan tanggal atau batas waktu terakhir untuk mengumpulkan dana.
 4. Nama Penggalang Dana: Menampilkan identitas atau nama penggalang dana yang bertanggung jawab atas campaign tersebut.
 5. Status Verifikasi Penggalang Dana: Menampilkan status verifikasi penggalang dana, seperti "Terverifikasi" untuk penggalang dana yang telah diverifikasi oleh platform atau pihak yang berwenang.
+6. banner maximal 3
+7. lokasi donasi (kota)
 
 ## Details Donasi
 
