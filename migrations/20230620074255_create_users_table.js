@@ -156,6 +156,13 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
+    .createTable('banners', function (table) {
+      table.increments('id').primary();
+      table.integer('campaigns_id').unsigned().references('id').inTable('campaigns');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+
     .createTable('fundraiser_withdrawals', function (table) {
       table.increments('id').primary();
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
