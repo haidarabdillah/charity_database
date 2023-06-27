@@ -189,12 +189,13 @@ ___
    4. jika di klik mengarah ke campaign yang di donasikan
 
 ## Detail Penggalang dana
-   - profile 
-   - name 
-   - status verifikasi
-   - social media list
-   - social media : ig, yt, facebook, twitter
-   - visi-misi 
-   - latar belakang 
-   - campaign yang dibuat
-   - kategori campaign yang sering dibuat
+
+- profile
+- name
+- status verifikasi
+- social media list
+- social media : ig, yt, facebook, twitter
+- visi-misi
+- latar belakang
+- campaign yang dibuat
+- kategori campaign yang sering dibuat
