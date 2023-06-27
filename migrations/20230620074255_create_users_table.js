@@ -124,24 +124,30 @@ exports.up = function (knex) {
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
+
     .createTable('categories', function (table) {
       table.increments('id').primary();
       table.string('name').notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
-    .createTable('fundraiser_geolocation', function (table) {
-      table.increments('id').primary();
-      table.integer('fundraiser_profile_id').unsigned().notNullable().references('id').inTable('fundraiser_profile');
-      table.decimal('latitude', 10, 8);
-      table.decimal('longitude', 11, 8);
-      // table.integer('kelurahan_id').unsigned().notNullable().references('id').inTable('kelurahan');
-      table.boolean('geolocation_locked').defaultTo(false);
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    .createTable('provinsi', function (table) {
+      table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
+      table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
     })
-
-
+    .createTable('kabupaten', function (table) {
+      table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
+      table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
+    })
+    .createTable('kecamatan', function (table) {
+      table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
+      table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
+    })
+    .createTable('desa', function (table) {
+      table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
+      table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
+    })
+  
     .createTable('campaigns', function (table) {
       table.increments('id').primary();
       table.string('title').notNullable();
@@ -151,7 +157,7 @@ exports.up = function (knex) {
       table.decimal('total_collected_amount', 10, 2).notNullable();
       table.decimal('total_withdrawn_amount', 10, 2).notNullable();
       table.integer('category_id').unsigned().references('id').inTable('categories');
-      table.integer('geo_location_id').unsigned().references('id').inTable('fundraiser_geolocation');
+      table.integer('desa_id').unsigned().notNullable().references('id').inTable('desa');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })

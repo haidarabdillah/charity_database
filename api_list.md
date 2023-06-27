@@ -273,10 +273,8 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
       "fundraiser_id": 3,
       "donation_id": 1,
       "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
-      "geo_location":{
-          "latitude": 123.456,
-          "longitude": 987.654,
-          "kelurahan":"nama desa",
+      "location":{
+          "desa":"nama desa",
           "kecamatan":"nama kecamatan",
           "kota":"nama kota", // kabupaten
           "provinsi":"nama provinsi" // provinsi
@@ -293,10 +291,8 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
       "fundraiser_name": "Fundraiser 4",
       "fundraiser_status": "personal",   
       "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
-      "geo_location":{
-          "latitude": 123.456,
-          "longitude": 987.654,
-          "kelurahan":"nama desa",
+      "location":{
+          "desa":"nama desa",
           "kecamatan":"nama kecamatan",
           "kota":"nama kota", // kabupaten
           "provinsi":"nama provinsi" // provinsi
@@ -349,66 +345,6 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
 
 **Request Body:**
 
-```json
-{
-  "latitude": 123.456,
-  "longitude": 987.654
-}
-```
-
-Endpoint ini digunakan untuk mengirimkan data geolocation pengguna. dan mendapatkan donasi disekitar pengguna
-
-**Response:**
-
-```json
-{"data": [ 
-    {
-      "title": "Campaign 3",
-      "deadline": "2023-06-30",
-      "tittle": "Bantu Tetangga, Bantu Saudara",
-      "fundraiser_name": "Fundraiser 3",
-      "fundraiser_status": "org",
-      "fundraiser_id": 3,
-      "donation_id": 1,
-      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
-      "geo_location":{
-          "latitude": 123.456,
-          "longitude": 987.654,
-          "kelurahan":"nama desa",
-          "kecamatan":"nama kecamatan",
-          "kota":"nama kota", // kabupaten
-          "provinsi":"nama provinsi" // provinsi
-      },
-      "fundraiser_id": 4,
-      "donation_id": 2,
-      "total_donation_needed": 20000,
-      "total_conation_received": 10000
-    },
-    {
-      "title": "Campaign 4",
-      "tittle": "Bantu Tetangga, Bantu Saudara",
-      "deadline": "2023-07-10",
-      "fundraiser_name": "Fundraiser 4",
-      "fundraiser_status": "personal",   
-      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
-      "geo_location":{
-          "latitude": 123.456,
-          "longitude": 987.654,
-          "kelurahan":"nama desa",
-          "kecamatan":"nama kecamatan",
-          "kota":"nama kota", // kabupaten
-          "provinsi":"nama provinsi" // provinsi
-      },
-      "fundraiser_id": 4,
-      "donation_id": 2,
-      "total_donation_needed": 20000,
-      "total_conation_received": 10000
-    }
-
-  ]
-}
-```
-
 </details>
 
 ## 4. List Donasi
@@ -416,7 +352,7 @@ Endpoint ini digunakan untuk mengirimkan data geolocation pengguna. dan mendapat
 <details>
 <summary><strong>GET - Kategori list</strong></summary>
 
-**Endpoint:** GET /api/category_list
+**Endpoint:** GET /api/v1/category_list
 
 Endpoint ini digunakan untuk meminta list kategori
 
@@ -431,73 +367,54 @@ Endpoint ini digunakan untuk meminta list kategori
 
 </details>
 
-<details>
-<summary><strong>GET - Filter kategori</strong></summary>
-
-**Endpoint:**
-
-```json
-GET /api/campaign_list?category=pendidikan,tahfidz&deadline=true&fundraiser=org&minimum=1000000&maximum=10000000000&city=semarang
-```
-
-Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedia serta settingan yang lainya
-
-**Response valid:**
-
-```json
-{"data": [ 
-    {
-      "title": "Campaign 3",
-      "deadline": "2023-06-30",
-      "tittle": "Bantu Tetangga, Bantu Saudara",
-      "fundraiser_name": "Fundraiser 3",
-      "fundraiser_status": "org",
-      "fundraiser_id": 3,
-      "donation_id": 1,
-      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
-      "geo_location":{
-          "latitude": 123.456,
-          "longitude": 987.654,
-          "kelurahan":"nama desa",
-          "kecamatan":"nama kecamatan",
-          "kota":"nama kota", // kabupaten
-          "provinsi":"nama provinsi" // provinsi
-      },
-      "fundraiser_id": 4,
-      "donation_id": 2,
-      "total_donation_needed": 20000,
-      "total_conation_received": 10000
-    },
-    {
-      "title": "Campaign 4",
-      "tittle": "Bantu Tetangga, Bantu Saudara",
-      "deadline": "2023-07-10",
-      "fundraiser_name": "Fundraiser 4",
-      "fundraiser_status": "personal",   
-      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
-      "geo_location":{
-          "latitude": 123.456,
-          "longitude": 987.654,
-          "kelurahan":"nama desa",
-          "kecamatan":"nama kecamatan",
-          "kota":"nama kota", // kabupaten
-          "provinsi":"nama provinsi" // provinsi
-      },
-      "fundraiser_id": 4,
-      "donation_id": 2,
-      "total_donation_needed": 20000,
-      "total_conation_received": 10000
-    }
-
-  ]
-}
-```
-
-  </details>
-
 ## 5. Penggalang dana
 
-- API /get fundraiser, bank account, social media, visi-misi dll.
+- API /get /api/v1/fundraiser
+Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank account, social media, visi-misi dll.<br>
+**Response valid:**
+
+  ```json
+    {
+    "fundraiser_profile": {
+      "id": 1,
+      "user_id": 123,
+      "profile_picture_url": "https://example.com/profile-picture.jpg",
+      "vision_mission": "To help those in need",
+      "background": "Experienced fundraiser",
+      "verified": "personal",
+      "created_at": "2023-06-26T10:15:30Z",
+      "updated_at": "2023-06-26T11:20:45Z",
+      "bank_accounts": [
+        {
+          "bank_id": 1,
+          "account_number": "1234567890",
+          "is_verified": true,
+          "payment_methods_id": 2,
+          "created_at": "2023-06-26T12:30:15Z",
+          "updated_at": "2023-06-26T13:45:20Z"
+        },
+        {
+          "bank_id": 2,
+          "account_number": "0987654321",
+          "is_verified": false,
+          "payment_methods_id": 1,
+          "created_at": "2023-06-26T14:00:10Z",
+          "updated_at": "2023-06-26T15:15:25Z"
+        }
+      ],
+      "contacts": {
+        "id": 1,
+        "website": "https://example.com",
+        "instagram": "example_instagram",
+        "youtube": "example_youtube",
+        "facebook": "example_facebook",
+        "twitter": "example_twitter"
+      }
+    }
+  }
+
+  ```
+
 - API /get /api/v1/fundraiser-campaigns
 - API /post /api/v1/profile
 - API /post /api/v1/kyc-personal
@@ -509,11 +426,148 @@ Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedi
 - API /post /api/v1/withdraw
 
 ## Settings
-- API /put /api/v1/user (+balance)
+
+- API /get /api/v1/me  (+balance)
+- API /put /api/v1/user
 - API /get /api/v1/payments_methode
 - API /put /api/v1/change_password
 - API /put /api/v1/phone
 - API /put /api/v1/social_media
 
 ## re-use API
-- API /get /api/v1/campaign_list
+
+- API /get /api/v1/provinsi_list<br>
+**Details:**
+  Endpoint ini digunakan untuk meminta data list provinsi pada kategori yang tersedia serta settingan yang lainya
+
+- API /get /api/v1/kabupaten_list<br>
+- API /get /api/v1/kecamatan_list<br>
+
+- API /get /api/v1/desa_list<br>
+**Endpoint:**
+
+  ```json
+  GET /api/campaign_list?category=pendidikan,tahfidz&deadline=true&fundraiser=org&minimum=1000000&maximum=10000000000&kabupaten=semarang
+  ```
+**Detail Field params**:
+- `category`: dipakai untuk kategori berupa array yang diformat dengan koma
+- `deadline`: parameter true/false dimana jika true maka akan muncul data campaign yang hampir selesai.
+- `fundraiser`: status fundraiser bisa org/personal.
+- `minimum`: filter berdasarkan minimal `total_donation_needed` dalam campaign
+- `maximum`: filter berdasarkan maximum `total_donation_needed` dalam campaign
+- `provinsi`: filter berdasarkan maximum `total_donation_needed` dalam campaign
+- `kabupaten`: filter berdasarkan maximum `total_donation_needed` dalam campaign
+- `kecamatan`: filter berdasarkan maximum `total_donation_needed` dalam campaign
+- `desa`: filter berdasarkan maximum `total_donation_needed` dalam campaign
+
+
+  Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedia serta settingan yang lainya
+
+  **Response valid:**
+
+  ```json
+    {
+        "data": {
+            "campaign": [
+                {
+                    "title": "Campaign 3",
+                    "deadline": "2023-06-30",
+                    "tittle": "Bantu Tetangga, Bantu Saudara",
+                    "fundraiser_name": "Fundraiser 3",
+                    "fundraiser_status": "org",
+                    "fundraiser_id": 3,
+                    "donation_id": 1,
+                    "banners": [
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg"
+                    ],
+                    "location": {
+                        "desa": "nama desa",
+                        "kecamatan": "nama kecamatan",
+                        "kota": "nama kota", // kabupaten
+                        "provinsi": "nama provinsi" // provinsi
+                    },
+                    "fundraiser_id": 4,
+                    "donation_id": 2,
+                    "total_donation_needed": 20000,
+                    "total_conation_received": 10000
+                },
+                {
+                    "title": "Campaign 4",
+                    "tittle": "Bantu Tetangga, Bantu Saudara",
+                    "deadline": "2023-07-10",
+                    "fundraiser_name": "Fundraiser 4",
+                    "fundraiser_status": "personal",
+                    "banners": [
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg"
+                    ],
+                    "location": {
+                        "desa": "nama desa",
+                        "kecamatan": "nama kecamatan",
+                        "kota": "nama kota", // kabupaten
+                        "provinsi": "nama provinsi" // provinsi
+                    },
+                    "fundraiser_id": 4,
+                    "donation_id": 2,
+                    "total_donation_needed": 20000,
+                    "total_conation_received": 10000
+                }
+            ],
+            "nearby_campaign": [
+                {
+                    "title": "Campaign 3",
+                    "deadline": "2023-06-30",
+                    "tittle": "Bantu Tetangga, Bantu Saudara",
+                    "fundraiser_name": "Fundraiser 3",
+                    "fundraiser_status": "org",
+                    "fundraiser_id": 3,
+                    "donation_id": 1,
+                    "banners": [
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg"
+                    ],
+                    "location": {
+                        "desa": "nama desa",
+                        "kecamatan": "nama kecamatan",
+                        "kota": "nama kota", // kabupaten
+                        "provinsi": "nama provinsi" // provinsi
+                    },
+                    "fundraiser_id": 4,
+                    "donation_id": 2,
+                    "total_donation_needed": 20000,
+                    "total_conation_received": 10000
+                },
+                {
+                    "title": "Campaign 4",
+                    "tittle": "Bantu Tetangga, Bantu Saudara",
+                    "deadline": "2023-07-10",
+                    "fundraiser_name": "Fundraiser 4",
+                    "fundraiser_status": "personal",
+                    "banners": [
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg",
+                        "https://example.com/banner5.jpg"
+                    ],
+                    "location": {
+                        "desa": "nama desa",
+                        "kecamatan": "nama kecamatan",
+                        "kota": "nama kota", // kabupaten
+                        "provinsi": "nama provinsi" // provinsi
+                    },
+                    "fundraiser_id": 4,
+                    "donation_id": 2,
+                    "total_donation_needed": 20000,
+                    "total_conation_received": 10000
+                }
+            ]
+        }
+    }  
+  ```
