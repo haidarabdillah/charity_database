@@ -151,7 +151,7 @@ ___
 1. Nama campaign/Title: Menampilkan nama campaign yang membutuhkan dukungan donatur.
 2. Jumlah Dana yang Dibutuhkan: Menampilkan jumlah dana yang dibutuhkan untuk mendukung campaign.
 3. Deadline: Menyajikan tanggal atau batas waktu terakhir untuk mengumpulkan dana.
-4. Nama Penggalang Dana: Menampilkan identitas atau nama penggalang dana yang bertanggung jawab atas campaign tersebut.
+4. Nama Penggalang Dana: Menampilkan identitas atau nama penggalang dana yang bertanggung jawab atas campaign tersebut, details menuju ke [details penggalang](#detail-penggalang-dana)
 5. Status Verifikasi Penggalang Dana: Menampilkan status verifikasi penggalang dana, seperti "Terverifikasi" untuk penggalang dana yang telah diverifikasi oleh platform atau pihak yang berwenang.
 6. banner maximal 3
 7. lokasi donasi (kota)
@@ -171,7 +171,7 @@ ___
          - kebuthan dana dengan rincianya
          - total dana terkumpul
          - dana yang sudah di cairkan
-            - total yang dicairkan
+            - total yang dicairkan  
             - sumbangan pengembangan platform
             - sisa balance yang belum dicairkan
          - history/timeline pencairan dana dengan keterangan update penggunaanya (disini hanya deskripsi singkat, jika di klik detals akan masuk ke halaman update/kabar terbaru campaign)
@@ -187,3 +187,14 @@ ___
    2. nominal donasi
    3. feedback komentar (jika ada)
    4. jika di klik mengarah ke campaign yang di donasikan
+
+## Detail Penggalang dana
+   - profile 
+   - name 
+   - status verifikasi
+   - social media list
+   - social media : ig, yt, facebook, twitter
+   - visi-misi 
+   - latar belakang 
+   - campaign yang dibuat
+   - kategori campaign yang sering dibuat

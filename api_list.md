@@ -266,31 +266,41 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
   "urgentCampaigns": [
     {
       "title": "Campaign 3",
-      "donation_needed": 10000,
       "deadline": "2023-06-30",
       "tittle": "Bantu Tetangga, Bantu Saudara",
       "fundraiser_name": "Fundraiser 3",
       "fundraiser_status": "org",
       "fundraiser_id": 3,
       "donation_id": 1,
-      "total_donation_needed": 50000,
-      "total_conation_received": 25000
-    },
-    {
-      "title": "Campaign 4",
-      "donation_needed": 8000,
-      "tittle": "Bantu Tetangga, Bantu Saudara",
-      "deadline": "2023-07-10",
-      "fundraiser_name": "Fundraiser 4",
-      "fundraiser_status": "personal",      "geo_location":{
+      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
+      "geo_location":{
           "latitude": 123.456,
           "longitude": 987.654,
           "kelurahan":"nama desa",
           "kecamatan":"nama kecamatan",
           "kota":"nama kota", // kabupaten
           "provinsi":"nama provinsi" // provinsi
-      }
-
+      },
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
+    },
+    {
+      "title": "Campaign 4",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "deadline": "2023-07-10",
+      "fundraiser_name": "Fundraiser 4",
+      "fundraiser_status": "personal",   
+      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
+      "geo_location":{
+          "latitude": 123.456,
+          "longitude": 987.654,
+          "kelurahan":"nama desa",
+          "kecamatan":"nama kecamatan",
+          "kota":"nama kota", // kabupaten
+          "provinsi":"nama provinsi" // provinsi
+      },
       "fundraiser_id": 4,
       "donation_id": 2,
       "total_donation_needed": 20000,
@@ -351,18 +361,16 @@ Endpoint ini digunakan untuk mengirimkan data geolocation pengguna. dan mendapat
 **Response:**
 
 ```json
- [
-   {
-     "title": "Campaign 3",
-      "donation_needed": 10000,
+{"data": [ 
+    {
+      "title": "Campaign 3",
       "deadline": "2023-06-30",
-      "fundraiser_name": "Fundraiser 3",
       "tittle": "Bantu Tetangga, Bantu Saudara",
+      "fundraiser_name": "Fundraiser 3",
       "fundraiser_status": "org",
       "fundraiser_id": 3,
       "donation_id": 1,
-      "total_donation_needed": 50000,
-      "total_conation_received": 25000,
+      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
       "geo_location":{
           "latitude": 123.456,
           "longitude": 987.654,
@@ -370,29 +378,66 @@ Endpoint ini digunakan untuk mengirimkan data geolocation pengguna. dan mendapat
           "kecamatan":"nama kecamatan",
           "kota":"nama kota", // kabupaten
           "provinsi":"nama provinsi" // provinsi
-      }
-    },
-    {
-      "title": "Campaign 4",
-      "donation_needed": 8000,
-      "deadline": "2023-07-10",
-      "fundraiser_name": "Fundraiser 4",
-      "tittle": "Bantu Tetangga, Bantu Saudara",
-      "fundraiser_status": "personal",
+      },
       "fundraiser_id": 4,
       "donation_id": 2,
       "total_donation_needed": 20000,
-      "total_conation_received": 10000,
-            "geo_location":{
+      "total_conation_received": 10000
+    },
+    {
+      "title": "Campaign 4",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "deadline": "2023-07-10",
+      "fundraiser_name": "Fundraiser 4",
+      "fundraiser_status": "personal",   
+      "banners":["https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg","https://example.com/banner5.jpg"],
+      "geo_location":{
           "latitude": 123.456,
           "longitude": 987.654,
           "kelurahan":"nama desa",
           "kecamatan":"nama kecamatan",
           "kota":"nama kota", // kabupaten
           "provinsi":"nama provinsi" // provinsi
-      }
+      },
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
     }
-  ],
+
+  ],}
 ```
 
 </details>
+
+## 4. List Donasi
+
+<details>
+<summary><strong>post - Filter kategori</strong></summary>
+
+**Endpoint:** GET /api/campaign_list?category="pendidikan"
+
+Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedia 
+
+**Response valid:**
+
+```json
+{
+  "message": "Registration successful",
+  "user_id": 1,
+  "phone_number": "081234567890",
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJwaG9uZV9udW1iZXIiOiIwODEyMzQ1Njc4OTAiLCJpYXQiOjE2MzA3MzQ1OTEsImV4cCI6MTYzMDc0NjE5MX0.LicdxVmqpwPxGydzz3oGnAgt5kNR-LNQp-4GH6LAD0I"
+}
+```
+
+**Response invalid:**
+
+```json
+{
+  "error": "Invalid password",
+  "message": "The password must be at least 8 characters long and contain a combination of letters, numbers, and special characters."
+}
+
+```
+
+  </details>
