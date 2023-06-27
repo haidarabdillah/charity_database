@@ -8,7 +8,7 @@
 Details Register - Meminta Kode Verifikasi <br>
 **Endpoint:** POST /api/register/request-verification-code
 
-Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang telah diinput oleh pengguna.
+Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang telah diinpost oleh pengguna.
 
 **Request Body:**
 
@@ -157,7 +157,7 @@ Endpoint ini digunakan untuk melakukan proses login pengguna.
 
 **Endpoint:** POST /api/register/request-forgot-code
 
-Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang telah diinput oleh pengguna.
+Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang telah diinpost oleh pengguna.
 
 **Request Body:**
 
@@ -429,15 +429,18 @@ Endpoint ini digunakan untuk meminta list kategori
 }
 ```
 
-  </details>
+</details>
 
 <details>
 <summary><strong>GET - Filter kategori</strong></summary>
 
-**Endpoint:** GET /api/campaign_list?category="pendidikan,tahfidz"&deadline=true&fundraiser=org&minimum=1000000&maximum=10000000000
+**Endpoint:**
 
-Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedia
+```json
+GET /api/campaign_list?category=pendidikan,tahfidz&deadline=true&fundraiser=org&minimum=1000000&maximum=10000000000&city=semarang
+```
 
+Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedia serta settingan yang lainya
 
 **Response valid:**
 
@@ -489,4 +492,28 @@ Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedi
   ]
 }
 ```
-</details>
+
+  </details>
+
+## 5. Penggalang dana
+
+- API /get fundraiser, bank account, social media, visi-misi dll.
+- API /get /api/v1/fundraiser-campaigns
+- API /post /api/v1/profile
+- API /post /api/v1/kyc-personal
+- API /post /api/v1/kyc-org
+- API /post /api/v1/bank
+- API /put /api/v1/bank
+- API /post /api/v1/campaign
+- API /post /api/v1/update-campaign
+- API /post /api/v1/withdraw
+
+## Settings
+- API /put /api/v1/user (+balance)
+- API /get /api/v1/payments_methode
+- API /put /api/v1/change_password
+- API /put /api/v1/phone
+- API /put /api/v1/social_media
+
+## re-use API
+- API /get /api/v1/campaign_list
