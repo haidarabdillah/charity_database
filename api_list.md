@@ -1231,7 +1231,7 @@ OK
 <details>
 <summary>post</summary>
 <br>
-/api/v1/profile/phone
+/api/v1/profile/change_phone
 <br>
 <br>
 
@@ -1239,25 +1239,30 @@ OK
 
 ```json
 {
-   "phone_number": "62895704447596",
-   "verification_code": "123456"
+   "old_phone": "62895704447596",
+   "new_phone": "62895704447596",
 }
 ```
 
 **Response**
 
+
 ```json
-OK
+{
+  "message": "Verification code has been sent to 62895704447596"
+}
+```
+**Response notvalid:**
+
+```json
+{
+  "error": "Invalid phone number",
+  "message": "The provided phone number is not valid."
+}
 ```
 
-</details>
-
-### 4. Change Social media
-
-<details>
-<summary>post</summary>
 <br>
-/api/v1/profile/social-medias
+/api/v1/profile/change_phone
 <br>
 <br>
 
@@ -1265,18 +1270,19 @@ OK
 
 ```json
 {
-   "website": "https://www.roisuladib.com",
-   "instagram": "https://www.instagram.com/adib_id/",
-   "youtube": "https://www.youtube.com/@adibid",
-   "facebook": "https://www.facebook.com/@adibid",
-   "twitter": "https://www.twitter.com/@adibid"
+   "old_phone": "62895704447596",
+   "new_phone": "62895704447596",
+   "verify_code":123456
 }
 ```
 
 **Response**
 
+
 ```json
-OK
+{
+  "message": "your account has been updated"
+}
 ```
 
 </details>
@@ -1348,15 +1354,6 @@ kategori yang tersedia serta settingan yang lainya
 ```
 
 </details>
-
-## Settings
-
-- API /get /api/v1/me  (+balance)
-- API /put /api/v1/user
-- API /get /api/v1/deposit_methods
-- API /put /api/v1/change_password
-- API /put /api/v1/phone
-- API /put /api/v1/social_media
 
 ## re-use API
 
