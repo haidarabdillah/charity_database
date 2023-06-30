@@ -395,7 +395,7 @@ Endpoint ini digunakan untuk meminta list kategori
 
 ## 5. Penggalang dana
 
-### 1. my fundraiser profile
+### 1. /get my fundraiser profile
 
 <details>
 <summary> API /get /api/v1/fundraiser_profile <br>
@@ -464,7 +464,76 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 </details>
 
-### 2. My fundraiser campaign
+### 2. /post fundraiser profile 
+
+<details>
+<summary> API /get /api/v1/fundraiser_profile <br>
+ </summary>
+
+Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank account, social media, visi-misi dll.<br>
+**Response valid:**
+
+  ```json
+   {
+    "fundraiser_profile": {
+      "user_id": 123,
+      "profile_picture_url": "https://example.com/profile-picture.jpg",
+      "vision_mission": "To help those in need",
+      "background": "Experienced fundraiser",
+      "verified": "personal",
+      "bank_accounts": [
+        {
+          "payment_method_id": 1,
+          "account_number": "1234567890",
+          "account_name": "yayasan peduli sesama",
+          "is_verified": true,
+        },
+        {
+          "payment_method_id": 2,
+          "account_number": "0987654321",
+          "account_name": "yayasan peduli sesama",
+          "is_verified": false,
+        }
+      ],
+      "contacts": {
+        "id": 1,
+        "website": "https://example.com",
+        "instagram": "example_instagram",
+        "youtube": "example_youtube",
+        "facebook": "example_facebook",
+        "twitter": "example_twitter"
+      },
+      "kyc_personal": {
+        "full_name": "John Doe",
+        "id_number": "1234567890",
+        "address": "123 Main Street, City",
+        "photo_id_front": "https://example.com/photo-id-front.jpg",
+        "photo_id_back": "https://example.com/photo-id-back.jpg",
+        "selfie_photo": "https://example.com/selfie-photo.jpg",
+        "verification_status": "success",
+      },
+      "kyc_org": {
+        "full_name": "John Doe",
+        "id_number": "1234567890",
+        "address": "123 Main Street, City",
+        "photo_id_front": "https://example.com/photo-id-front.jpg",
+        "photo_id_back": "https://example.com/photo-id-back.jpg",
+        "selfie_photo": "https://example.com/selfie-photo.jpg",
+        "verification_status": "pending",
+      }
+    }
+  }
+
+  ```
+
+**Detail Field response**:
+
+- `verified`: status user bisa berupa "not_verified", "personal", "org"
+- `payment_method_id`: merujuk pada id payment methods yang tersedia, bisa di check di re-use api
+
+</details>
+
+### 3. /get My fundraiser campaign
 
 <details>
 <summary>API /get /api/v1/fundraiser-campaigns
@@ -530,7 +599,73 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 </details>
 
-### 3. Fundraiser verify kyc
+### 3. /post new campaign
+
+<details>
+<summary>API /post /api/v1/campaign
+ </summary>
+
+   Endpoint digunakan untuk mendapatkan list fundraiser campigns.<br>
+  **Response valid:**
+
+```json
+{
+  "campaign": [
+    {
+      "title": "Campaign 3",
+      "deadline": "2023-06-30",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "fundraiser_name": "Fundraiser 3",
+      "fundraiser_status": "org",
+      "fundraiser_id": 3,
+      "donation_id": 1,
+      "banners": [
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg"
+      ],
+      "location": {
+        "desa": "nama desa",
+        "kecamatan": "nama kecamatan",
+        "kota": "nama kota", // kabupaten
+        "provinsi": "nama provinsi" // provinsi
+      },
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
+    },
+    {
+      "title": "Campaign 4",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "deadline": "2023-07-10",
+      "fundraiser_name": "Fundraiser 4",
+      "fundraiser_status": "personal",
+      "banners": [
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg"
+      ],
+      "location": {
+        "desa": "nama desa",
+        "kecamatan": "nama kecamatan",
+        "kota": "nama kota", // kabupaten
+        "provinsi": "nama provinsi" // provinsi
+      },
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
+    }
+  ]
+}
+```
+
+</details>
+
+### 4. Fundraiser verify kyc
 
 <details>
 <summary>API /post /api/v1/kyc-personal
@@ -670,7 +805,6 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 - API /post /api/v1/bank
 - API /put /api/v1/bank
-- API /post /api/v1/campaign
 - API /post /api/v1/update-campaign
 - API /post /api/v1/withdraw
 
