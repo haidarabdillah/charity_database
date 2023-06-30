@@ -9,6 +9,7 @@ exports.up = function (knex) {
       table.string('password_hash');
       table.decimal('balance', 10, 2).defaultTo(0);
       table.boolean('is_fundraiser').defaultTo(false);
+      table.enum('role', ['user', 'admin', 'sub-admin']).defaultTo('user');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
