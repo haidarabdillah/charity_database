@@ -22,7 +22,7 @@ exports.up = function (knex) {
       table.decimal('minimum_withdrawal');
       table.boolean('enable_deposit').defaultTo(true);
       table.boolean('enable_withdrawal').defaultTo(true);
-      table.string('url_log');
+      table.string('url_logo');
     })
 
     .createTable('deposit_methods', function (table) {
@@ -59,7 +59,7 @@ exports.up = function (knex) {
       table.string('profile_picture_url');
       table.string('vision_mission');
       table.string('background');
-      table.enum('verified', ['pending', 'personal', 'org']).defaultTo('pending');
+      table.enum('verified', ['not_verified', 'personal', 'org']).defaultTo('pending');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
@@ -104,6 +104,7 @@ exports.up = function (knex) {
     .createTable('fundraiser_bank_accounts', (table) => {
       table.increments('bank_id').primary();
       table.string('account_number');
+      table.string('account_name');
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
       table.boolean('is_verified').defaultTo(false);
       table.integer('payment_methods_id').unsigned().references('id').inTable('payment_methods');

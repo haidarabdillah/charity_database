@@ -3,7 +3,7 @@
 ## 1. Register
 
 <details>
-<summary><strong>Register - Meminta Kode Verifikasi</strong></summary>
+<summary>Register - Meminta Kode Verifikasi</summary>
 
 Details Register - Meminta Kode Verifikasi <br>
 **Endpoint:** POST /api/register/request-verification-code
@@ -38,7 +38,7 @@ Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang 
   </details>
 
 <details>
-<summary><strong>Register - verify Kode Verifikasi</strong></summary>
+<summary>Register - verify Kode Verifikasi</summary>
 
 **Endpoint:** POST /api/register-verify-code
 
@@ -73,7 +73,7 @@ Endpoint ini digunakan untuk memverifikasi kode yang dikirimkan ke nomor HP peng
   </details>
 
 <details>
-<summary><strong>Register - Kirim Kode Verifikasi dan Password</strong></summary>
+<summary>Register - Kirim Kode Verifikasi dan Password</summary>
 
 **Endpoint:** POST /api/register/verify-and-set-password
 
@@ -115,7 +115,7 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
 ## 2. Login
 
 <details>
-<summary><strong>Login - standart user login</strong></summary>
+<summary>Login - standart user login</summary>
 
 **Endpoint:** POST /api/login
 
@@ -153,7 +153,7 @@ Endpoint ini digunakan untuk melakukan proses login pengguna.
 ## 3. Forgot Password
 
 <details>
-<summary><strong>Forgot - Meminta Kode Verifikasi</strong></summary>
+<summary>Forgot - Meminta Kode Verifikasi</summary>
 
 **Endpoint:** POST /api/register/request-forgot-code
 
@@ -186,7 +186,7 @@ Endpoint ini digunakan untuk meminta kode verifikasi melalui nomor telepon yang 
 
   </details>
 <details>
-<summary><strong>Forgot - Kirim Kode Verifikasi dan Password</strong></summary>
+<summary>Forgot - Kirim Kode Verifikasi dan Password</summary>
 
 **Endpoint:** POST /api/register/forgot-and-set-password
 
@@ -228,7 +228,7 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
 ## 4. Dashboard
 
 <details>
-<summary><strong> get dashboard data</strong></summary>
+<summary> get dashboard data</summary>
 
 **Endpoint: GET /dashboard**
 
@@ -339,7 +339,7 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
   </details>
 
 <details>
-<summary><strong> get campaign nearby</strong></summary>
+<summary> get campaign nearby</summary>
 
 **Endpoint: POST /campaigns/nearby**
 
@@ -350,7 +350,7 @@ Endpoint ini digunakan untuk mengirimkan kode verifikasi dan password pengguna u
 ## 4. List Donasi
 
 <details>
-<summary><strong>GET - Kategori list</strong></summary>
+<summary>GET - Kategori list</summary>
 
 **Endpoint:** GET /api/v1/category_list
 
@@ -359,8 +359,34 @@ Endpoint ini digunakan untuk meminta list kategori
 **Response valid:**
 
 ```json
-{"data": [ 
-   "pendidikan","social","agama","pondok","tahfidz","dhuafa"
+{
+  "data": [
+    [
+      {
+        "category": "pendidikan",
+        "icon": "example link"
+      },
+      {
+        "category": "social",
+        "icon": "example link"
+      },
+      {
+        "category": "agama",
+        "icon": "example link"
+      },
+      {
+        "category": "pondok",
+        "icon": "example link"
+      },
+      {
+        "category": "tahfidz",
+        "icon": "example link"
+      },
+      {
+        "category": "dhuafa",
+        "icon": "example link"
+      }
+    ]
   ]
 }
 ```
@@ -369,37 +395,36 @@ Endpoint ini digunakan untuk meminta list kategori
 
 ## 5. Penggalang dana
 
-- API /get /api/v1/fundraiser
+### 1. my fundraiser profile
+
+<details>
+<summary> API /get /api/v1/fundraiser_profile <br>
+ </summary>
+
 Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank account, social media, visi-misi dll.<br>
 **Response valid:**
 
   ```json
     {
     "fundraiser_profile": {
-      "id": 1,
       "user_id": 123,
       "profile_picture_url": "https://example.com/profile-picture.jpg",
       "vision_mission": "To help those in need",
       "background": "Experienced fundraiser",
       "verified": "personal",
-      "created_at": "2023-06-26T10:15:30Z",
-      "updated_at": "2023-06-26T11:20:45Z",
       "bank_accounts": [
         {
-          "bank_id": 1,
+          "payment_method_id": 1,
           "account_number": "1234567890",
+          "account_name":"yayasan peduli sesama",
           "is_verified": true,
-          "payment_methods_id": 2,
-          "created_at": "2023-06-26T12:30:15Z",
-          "updated_at": "2023-06-26T13:45:20Z"
+
         },
         {
-          "bank_id": 2,
+          "payment_method_id": 2,
           "account_number": "0987654321",
+          "account_name":"yayasan peduli sesama",
           "is_verified": false,
-          "payment_methods_id": 1,
-          "created_at": "2023-06-26T14:00:10Z",
-          "updated_at": "2023-06-26T15:15:25Z"
         }
       ],
       "contacts": {
@@ -409,15 +434,143 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         "youtube": "example_youtube",
         "facebook": "example_facebook",
         "twitter": "example_twitter"
+      },
+      "kyc_personal":{
+      {
+        "full_name": "John Doe",
+        "id_number": "1234567890",
+        "address": "123 Main Street, City",
+        "photo_id_front": "https://example.com/photo-id-front.jpg",
+        "photo_id_back": "https://example.com/photo-id-back.jpg",
+        "selfie_photo": "https://example.com/selfie-photo.jpg",
+        "verification_status": "pending",
+      },
+      "kyc_personal":{
+      {
+        "full_name": "John Doe",
+        "id_number": "1234567890",
+        "address": "123 Main Street, City",
+        "photo_id_front": "https://example.com/photo-id-front.jpg",
+        "photo_id_back": "https://example.com/photo-id-back.jpg",
+        "selfie_photo": "https://example.com/selfie-photo.jpg",
+        "verification_status": "pending",
+      }
+
       }
     }
   }
 
   ```
 
-- API /get /api/v1/fundraiser-campaigns
-- API /post /api/v1/profile
-- API /post /api/v1/kyc-personal
+**Detail Field response**:
+
+- `verified`: status user bisa berupa "not_verified", "personal", "org"
+- `payment_method_id`: merujuk pada id payment methods yang tersedia, bisa di check di re-use api
+
+</details>
+
+### 2. My fundraiser campaign
+
+<details>
+<summary>API /get /api/v1/fundraiser-campaigns
+ </summary>
+
+   Endpoint digunakan untuk mendapatkan list fundraiser campigns.<br>
+  **Response valid:**
+
+```json
+{
+  "campaign": [
+    {
+      "title": "Campaign 3",
+      "deadline": "2023-06-30",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "fundraiser_name": "Fundraiser 3",
+      "fundraiser_status": "org",
+      "fundraiser_id": 3,
+      "donation_id": 1,
+      "banners": [
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg"
+      ],
+      "location": {
+        "desa": "nama desa",
+        "kecamatan": "nama kecamatan",
+        "kota": "nama kota", // kabupaten
+        "provinsi": "nama provinsi" // provinsi
+      },
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
+    },
+    {
+      "title": "Campaign 4",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "deadline": "2023-07-10",
+      "fundraiser_name": "Fundraiser 4",
+      "fundraiser_status": "personal",
+      "banners": [
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg",
+        "https://example.com/banner5.jpg"
+      ],
+      "location": {
+        "desa": "nama desa",
+        "kecamatan": "nama kecamatan",
+        "kota": "nama kota", // kabupaten
+        "provinsi": "nama provinsi" // provinsi
+      },
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
+    }
+  ]
+}
+```
+
+</details>
+
+### 3. Fundraiser verify kyc
+
+<details>
+<summary>API /post /api/v1/kyc-personal
+</summary>
+
+**Details:**
+  Endpoint ini digunakan untuk memverifikasi data KYC fundraiser
+
+**Request Body:**
+
+```json
+{
+  "": "081234567890"
+}
+```
+
+**Response valid:**
+
+```json
+{
+  "message": "Verification code has been sent to 081234567890"
+}
+```
+
+**Response notvalid:**
+
+```json
+{
+  "error": "Invalid phone number",
+  "message": "The provided phone number is not valid."
+}
+```
+
+
+</details>
 - API /post /api/v1/kyc-org
 - API /post /api/v1/bank
 - API /put /api/v1/bank
@@ -429,7 +582,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 - API /get /api/v1/me  (+balance)
 - API /put /api/v1/user
-- API /get /api/v1/payments_methode
+- API /get /api/v1/deposit_methods
 - API /put /api/v1/change_password
 - API /put /api/v1/phone
 - API /put /api/v1/social_media
@@ -437,19 +590,88 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 ## re-use API
 
 - API /get /api/v1/provinsi_list<br>
+
 **Details:**
   Endpoint ini digunakan untuk meminta data list provinsi pada kategori yang tersedia serta settingan yang lainya
 
 - API /get /api/v1/kabupaten_list<br>
 - API /get /api/v1/kecamatan_list<br>
 
-- API /get /api/v1/desa_list<br>
+### API /get /api/v1/payment_methods
+
+<details>
+<summary> Details API payment_methods</summary>
+
+**Details:**
+  Endpoint ini digunakan untuk meminta payment mothods yang tersedia
+
+  **Response valid:**
+
+  ```json
+{
+  "data": [
+    {
+      "id": 1,
+      "method_code": "bank1",
+      "method_type": "bank",
+      "minimum_deposit": 1000.00,
+      "minimum_withdrawal": 500.00,
+      "enable_deposit": true,
+      "enable_withdrawal": true,
+      "url_logo": "https://example.com/bank1-logo.png"
+    },
+    {
+      "id": 2,
+      "method_code": "ewallet1",
+      "method_type": "e-wallet",
+      "minimum_deposit": 500.00,
+      "minimum_withdrawal": 100.00,
+      "enable_deposit": true,
+      "enable_withdrawal": true,
+      "url_logo": "https://example.com/ewallet1-logo.png"
+    },
+    {
+      "id": 3,
+      "method_code": "bank2",
+      "method_type": "bank",
+      "minimum_deposit": 2000.00,
+      "minimum_withdrawal": 1000.00,
+      "enable_deposit": true,
+      "enable_withdrawal": true,
+      "url_logo": "https://example.com/bank2-logo.png"
+    },
+    {
+      "id": 4,
+      "method_code": "ewallet2",
+      "method_type": "e-wallet",
+      "minimum_deposit": 100.00,
+      "minimum_withdrawal": 50.00,
+      "enable_deposit": true,
+      "enable_withdrawal": true,
+      "url_logo": "https://example.com/ewallet2-logo.png"
+    }
+  ]
+}
+  ```
+
+</details>
+
+### API /get /api/v1/camapaign_list
+
+<details>
+<summary>Details API campaign_list</summary>
+
+**Details:**
+  Endpoint ini digunakan untuk meminta data campaign berdasarkan filter yang diminita users
+
 **Endpoint:**
 
   ```json
   GET /api/campaign_list?category=pendidikan,tahfidz&deadline=true&fundraiser=org&minimum=1000000&maximum=10000000000&kabupaten=semarang
   ```
+
 **Detail Field params**:
+
 - `category`: dipakai untuk kategori berupa array yang diformat dengan koma
 - `deadline`: parameter true/false dimana jika true maka akan muncul data campaign yang hampir selesai.
 - `fundraiser`: status fundraiser bisa org/personal.
@@ -459,7 +681,6 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 - `kabupaten`: filter berdasarkan maximum `total_donation_needed` dalam campaign
 - `kecamatan`: filter berdasarkan maximum `total_donation_needed` dalam campaign
 - `desa`: filter berdasarkan maximum `total_donation_needed` dalam campaign
-
 
   Endpoint ini digunakan untuk meminta data berdasarkan pada kategori yang tersedia serta settingan yang lainya
 
@@ -478,13 +699,13 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
                     "fundraiser_id": 3,
                     "donation_id": 1,
                     "banners": [
-                        "https://example.com/banner5.jpg",
+                      "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg"
                     ],
                     "location": {
-                        "desa": "nama desa",
+                      "desa": "nama desa",
                         "kecamatan": "nama kecamatan",
                         "kota": "nama kota", // kabupaten
                         "provinsi": "nama provinsi" // provinsi
@@ -495,19 +716,19 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
                     "total_conation_received": 10000
                 },
                 {
-                    "title": "Campaign 4",
+                  "title": "Campaign 4",
                     "tittle": "Bantu Tetangga, Bantu Saudara",
                     "deadline": "2023-07-10",
                     "fundraiser_name": "Fundraiser 4",
                     "fundraiser_status": "personal",
                     "banners": [
-                        "https://example.com/banner5.jpg",
+                      "https://example.com/banner5.jpg", 
                         "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg"
                     ],
                     "location": {
-                        "desa": "nama desa",
+                      "desa": "nama desa",
                         "kecamatan": "nama kecamatan",
                         "kota": "nama kota", // kabupaten
                         "provinsi": "nama provinsi" // provinsi
@@ -519,8 +740,8 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
                 }
             ],
             "nearby_campaign": [
-                {
-                    "title": "Campaign 3",
+              {
+                "title": "Campaign 3",
                     "deadline": "2023-06-30",
                     "tittle": "Bantu Tetangga, Bantu Saudara",
                     "fundraiser_name": "Fundraiser 3",
@@ -534,7 +755,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
                         "https://example.com/banner5.jpg"
                     ],
                     "location": {
-                        "desa": "nama desa",
+                      "desa": "nama desa",
                         "kecamatan": "nama kecamatan",
                         "kota": "nama kota", // kabupaten
                         "provinsi": "nama provinsi" // provinsi
@@ -545,19 +766,19 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
                     "total_conation_received": 10000
                 },
                 {
-                    "title": "Campaign 4",
+                  "title": "Campaign 4",
                     "tittle": "Bantu Tetangga, Bantu Saudara",
                     "deadline": "2023-07-10",
                     "fundraiser_name": "Fundraiser 4",
                     "fundraiser_status": "personal",
                     "banners": [
-                        "https://example.com/banner5.jpg",
+                      "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg",
                         "https://example.com/banner5.jpg"
                     ],
                     "location": {
-                        "desa": "nama desa",
+                      "desa": "nama desa",
                         "kecamatan": "nama kecamatan",
                         "kota": "nama kota", // kabupaten
                         "provinsi": "nama provinsi" // provinsi
@@ -571,3 +792,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         }
     }  
   ```
+
+- `nearby_campaign`: merupakan response yang muncul jika user memilih lokasi, nearby campaign merupakan daerah yang masih dalam 1 kecamatan atau kabupaten atau provinsi
+
+</details>
