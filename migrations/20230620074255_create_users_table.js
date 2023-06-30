@@ -57,10 +57,12 @@ exports.up = function (knex) {
     .createTable('fundraiser_profile', function (table) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().references('id').inTable('users');
+      table.string('full_name');
       table.string('profile_picture_url');
       table.string('vision_mission');
       table.string('background');
-      table.enum('verified', ["pending",'personal', 'org']).defaultTo('pending');
+      table.boolean('is_personal').defaultTo(false);
+      table.boolean('is_org').defaultTo(false);
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
@@ -68,7 +70,6 @@ exports.up = function (knex) {
     .createTable('fundraiser_kyc_personal', (table) => {
       table.increments('kyc_id').primary();
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
-      table.string('full_name');
       table.string('id_number');
       table.string('address');
       table.string('photo_id_front');

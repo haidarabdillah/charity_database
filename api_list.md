@@ -408,10 +408,12 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
    {
     "fundraiser_profile": {
       "user_id": 123,
+      "full_name": "John Doe",
       "profile_picture_url": "https://example.com/profile-picture.jpg",
       "vision_mission": "To help those in need",
       "background": "Experienced fundraiser",
-      "verified": "personal",
+      "is_personal": true,
+      "is_org": false,
       "bank_accounts": [
         {
           "payment_method_id": 1,
@@ -435,7 +437,6 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         "twitter": "example_twitter"
       },
       "kyc_personal": {
-        "full_name": "John Doe",
         "id_number": "1234567890",
         "address": "123 Main Street, City",
         "photo_id_front": "https://example.com/photo-id-front.jpg",
@@ -459,7 +460,8 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 **Detail Field response**:
 
-- `verified`: status user bisa berupa "not_verified", "personal", "org"
+- `is_personal`: boolean yang menunjukan status personal user
+- `is_org`: boolean yang menunjukan status personal user
 - `payment_method_id`: merujuk pada id payment methods yang tersedia, bisa di check di re-use api
 
 </details>
@@ -467,34 +469,20 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 ### 2. /post fundraiser profile 
 
 <details>
-<summary> API /get /api/v1/fundraiser_profile <br>
+<summary> API /post /api/v1/fundraiser_profile <br>
  </summary>
 
 Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank account, social media, visi-misi dll.<br>
 **Response valid:**
 
   ```json
-   {
+     {
     "fundraiser_profile": {
       "user_id": 123,
       "profile_picture_url": "https://example.com/profile-picture.jpg",
+      "full_name": "John Doe",
       "vision_mission": "To help those in need",
       "background": "Experienced fundraiser",
-      "verified": "personal",
-      "bank_accounts": [
-        {
-          "payment_method_id": 1,
-          "account_number": "1234567890",
-          "account_name": "yayasan peduli sesama",
-          "is_verified": true,
-        },
-        {
-          "payment_method_id": 2,
-          "account_number": "0987654321",
-          "account_name": "yayasan peduli sesama",
-          "is_verified": false,
-        }
-      ],
       "contacts": {
         "id": 1,
         "website": "https://example.com",
@@ -502,24 +490,6 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         "youtube": "example_youtube",
         "facebook": "example_facebook",
         "twitter": "example_twitter"
-      },
-      "kyc_personal": {
-        "full_name": "John Doe",
-        "id_number": "1234567890",
-        "address": "123 Main Street, City",
-        "photo_id_front": "https://example.com/photo-id-front.jpg",
-        "photo_id_back": "https://example.com/photo-id-back.jpg",
-        "selfie_photo": "https://example.com/selfie-photo.jpg",
-        "verification_status": "success",
-      },
-      "kyc_org": {
-        "full_name": "John Doe",
-        "id_number": "1234567890",
-        "address": "123 Main Street, City",
-        "photo_id_front": "https://example.com/photo-id-front.jpg",
-        "photo_id_back": "https://example.com/photo-id-back.jpg",
-        "selfie_photo": "https://example.com/selfie-photo.jpg",
-        "verification_status": "pending",
       }
     }
   }
@@ -802,11 +772,582 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 </details>
 
 
+### 6. Bank
 
-- API /post /api/v1/bank
-- API /put /api/v1/bank
-- API /post /api/v1/update-campaign
-- API /post /api/v1/withdraw
+<details>
+<summary> Create a new bank <br>
+ </summary>
+<br>
+/api/v1/bank
+<br>
+<br>
+Endpoint digunakan untuk menambahkan data bank
+<br>
+<br>
+
+**Request body:**
+
+```json
+{
+   "account_number": "001",
+   "account_name": "Bank BCA",
+   "is_verified": true,
+   "fundraiser_profile_id": 123,
+   "payment_method_id": 313
+}
+```
+
+**Response valid:**
+
+```json
+{
+   "id": "34r2332-wfwer24-2423432-wdf2trth",
+   "account_number": "001",
+   "account_name": "Bank BCA",
+   "is_verified": true,
+   "fundraiser_profile": {
+      "user_id": 123,
+      "profile_picture_url": "https://example.com/profile-picture.jpg",
+      "vision_mission": "To help those in need",
+      "background": "Experienced fundraiser",
+      "verified": "personal",
+      "bank_accounts": [
+         {
+            "payment_method_id": 1,
+            "account_number": "1234567890",
+            "account_name": "yayasan peduli sesama",
+            "is_verified": true
+         },
+         {
+            "payment_method_id": 2,
+            "account_number": "0987654321",
+            "account_name": "yayasan peduli sesama",
+            "is_verified": false
+         }
+      ],
+      "contacts": {
+         "id": 1,
+         "website": "https://example.com",
+         "instagram": "example_instagram",
+         "youtube": "example_youtube",
+         "facebook": "example_facebook",
+         "twitter": "example_twitter"
+      },
+      "kyc_personal": {
+         "full_name": "John Doe",
+         "id_number": "1234567890",
+         "address": "123 Main Street, City",
+         "photo_id_front": "https://example.com/photo-id-front.jpg",
+         "photo_id_back": "https://example.com/photo-id-back.jpg",
+         "selfie_photo": "https://example.com/selfie-photo.jpg",
+         "verification_status": "success"
+      },
+      "kyc_org": {
+         "full_name": "John Doe",
+         "id_number": "1234567890",
+         "address": "123 Main Street, City",
+         "photo_id_front": "https://example.com/photo-id-front.jpg",
+         "photo_id_back": "https://example.com/photo-id-back.jpg",
+         "selfie_photo": "https://example.com/selfie-photo.jpg",
+         "verification_status": "pending"
+      }
+   },
+   "payment_methods": [
+      {
+         "id": 1,
+         "method_code": "bank1",
+         "method_type": "bank",
+         "minimum_deposit": 1000.0,
+         "minimum_withdrawal": 500.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/bank1-logo.png"
+      },
+      {
+         "id": 2,
+         "method_code": "ewallet1",
+         "method_type": "e-wallet",
+         "minimum_deposit": 500.0,
+         "minimum_withdrawal": 100.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/ewallet1-logo.png"
+      },
+      {
+         "id": 3,
+         "method_code": "bank2",
+         "method_type": "bank",
+         "minimum_deposit": 2000.0,
+         "minimum_withdrawal": 1000.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/bank2-logo.png"
+      },
+      {
+         "id": 4,
+         "method_code": "ewallet2",
+         "method_type": "e-wallet",
+         "minimum_deposit": 100.0,
+         "minimum_withdrawal": 50.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/ewallet2-logo.png"
+      }
+   ]
+}
+```
+
+</details>
+
+### 7. Update campaign
+
+<details>
+<summary> Create a new Update campaign <br>
+ </summary>
+
+<br>
+/api/v1/update-campaign
+<br>
+<br>
+Endpoint digunakan untuk menambahkan data update campaign
+<br>
+<br>
+
+**Request body:**
+
+```json
+{
+   "update_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+   "update_type": "penyaluran",
+   "campaign_id": 123,
+   "fundraiser_withdrawal_id": 345
+}
+```
+
+**Response valid:**
+
+```json
+{
+   "update_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+   "update_type": "penyaluran",
+   "campaign": {
+      "id": "gwttw2-gwrt542-2twgw42-2452twrg",
+      "title": "Title campaign",
+      "description": "lorem ipsum dolor sit amet, consect",
+      "required_amount": "3232323.00",
+      "total_collected_amount": "3232323.00",
+      "total_withdrawn_amount": "3232323.00"
+   },
+   "fundraiser_withdrawal_id": 345
+}
+```
+
+</details>
+
+### 8. Withdrawals
+
+<details>
+<summary> Create a new withdrawals<br>
+ </summary>
+
+<br>
+/api/v1/withdrawals
+<br>
+<br>
+Endpoint digunakan untuk menambahkan data withdrawals
+<br>
+<br>
+
+**Response valid:**
+
+```json
+{
+   "id": "rheu645-3hrwghj-34vfbjs-u2gfhvsh",
+   "amount": "4242.42",
+   "status": "success",
+   "requested_at": "2023-06-30T01:40:21.537617Z",
+   "completed_at": "2023-06-30T01:40:21.537617Z",
+   "external_id_transaction": "kwewek",
+   "fundraiser_profile": {
+      "user_id": 123,
+      "profile_picture_url": "https://example.com/profile-picture.jpg",
+      "vision_mission": "To help those in need",
+      "background": "Experienced fundraiser",
+      "verified": "personal",
+      "bank_accounts": [
+         {
+            "payment_method_id": 1,
+            "account_number": "1234567890",
+            "account_name": "yayasan peduli sesama",
+            "is_verified": true
+         },
+         {
+            "payment_method_id": 2,
+            "account_number": "0987654321",
+            "account_name": "yayasan peduli sesama",
+            "is_verified": false
+         }
+      ],
+      "contacts": {
+         "id": 1,
+         "website": "https://example.com",
+         "instagram": "example_instagram",
+         "youtube": "example_youtube",
+         "facebook": "example_facebook",
+         "twitter": "example_twitter"
+      },
+      "kyc_personal": {
+         "full_name": "John Doe",
+         "id_number": "1234567890",
+         "address": "123 Main Street, City",
+         "photo_id_front": "https://example.com/photo-id-front.jpg",
+         "photo_id_back": "https://example.com/photo-id-back.jpg",
+         "selfie_photo": "https://example.com/selfie-photo.jpg",
+         "verification_status": "success"
+      },
+      "kyc_org": {
+         "full_name": "John Doe",
+         "id_number": "1234567890",
+         "address": "123 Main Street, City",
+         "photo_id_front": "https://example.com/photo-id-front.jpg",
+         "photo_id_back": "https://example.com/photo-id-back.jpg",
+         "selfie_photo": "https://example.com/selfie-photo.jpg",
+         "verification_status": "pending"
+      }
+   },
+   "campaigns": {
+      "title": "Campaign 3",
+      "deadline": "2023-06-30",
+      "tittle": "Bantu Tetangga, Bantu Saudara",
+      "fundraiser_name": "Fundraiser 3",
+      "fundraiser_status": "org",
+      "fundraiser_id": 3,
+      "donation_id": 1,
+      "banners": [
+         "https://example.com/banner5.jpg",
+         "https://example.com/banner5.jpg",
+         "https://example.com/banner5.jpg",
+         "https://example.com/banner5.jpg"
+      ],
+      "location": {
+         "desa": "nama desa",
+         "kecamatan": "nama kecamatan",
+         "kota": "nama kota", // kabupaten
+         "provinsi": "nama provinsi" // provinsi
+      },
+      "fundraiser_id": 4,
+      "donation_id": 2,
+      "total_donation_needed": 20000,
+      "total_conation_received": 10000
+   }
+}
+```
+
+</details>
+
+## Settings
+
+### 1. Profile
+
+<details>
+<summary>Get</summary>
+<br>
+/api/v1/profile
+<br>
+<br>
+
+**Response valid:**
+
+```json
+{
+   "id": "a4969284-710f-4948-affd-c3d538bf32c4",
+   "created_at": "2023-06-30T07:15:10.861Z",
+   "updated_at": "2023-06-30T07:20:28.656Z",
+   "name": "Adib",
+   "phone_number": "62895704447596",
+   "balance": "0.00",
+   "profile_picture": null,
+   "is_fundraiser": true,
+   "is_name_hidden": true,
+   "role": "admin"
+}
+```
+
+</details>
+<details>
+<summary>Put</summary>
+<br>
+/api/v1/profile
+<br>
+<br>
+
+**Body**
+
+```json
+{
+   "name": "Adib Zamroni",
+   "phone_number": "62895704447596",
+   "profile_picture": "https://satunusa.com/static/users/avatar-1678347348734.jpeg",
+   "is_name_hidden": true
+}
+```
+
+**Response valid:**
+
+```json
+{
+   "id": "a4969284-710f-4948-affd-c3d538bf32c4",
+   "created_at": "2023-06-30T07:15:10.861Z",
+   "updated_at": "2023-06-30T07:20:28.656Z",
+   "name": "Adib Zamroni",
+   "phone_number": "62895704447596",
+   "balance": "0.00",
+   "profile_picture": "https://satunusa.com/static/users/avatar-1678347348734.jpeg",
+   "is_fundraiser": true,
+   "is_name_hidden": true,
+   "role": "admin"
+}
+```
+
+</details>
+
+### 2. Deposit methods
+
+<details>
+<summary>Get</summary>
+<br>
+/api/v1/deposit-methods
+<br>
+<br>
+
+**Response valid:**
+
+```json
+[
+   {
+      "id": "32af6ff4-bb2a-4806-9aa6-43bd47ad896f",
+      "created_at": "2023-06-30T03:40:00.706Z",
+      "updated_at": "2023-06-30T03:40:00.706Z",
+      "external_id": "external_id",
+      "account_number": "5684576857",
+      "name": "Account name",
+      "status": "available",
+      "expiration_date": "2023-06-30T03:19:19.791Z",
+      "payment_method": {
+         "id": "075f0a42-4264-4b17-abf3-c3e42be2f0b9",
+         "created_at": "2023-06-30T01:41:41.096Z",
+         "updated_at": "2023-06-30T01:41:41.096Z",
+         "code": null,
+         "name": "GOPAY",
+         "type": "e-wallet",
+         "minimum_deposit": "25000.00",
+         "minimum_withdrawal": "120000.00",
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "http://example.com"
+      },
+      "user": {
+         "id": "e1296628-785a-43d8-8a83-012d33498453",
+         "created_at": "2023-06-30T01:40:21.537Z",
+         "updated_at": "2023-06-30T01:40:21.537Z",
+         "name": "Husain",
+         "phone_number": "62895704447600",
+         "balance": "0.00",
+         "profile_picture": null,
+         "is_fundraiser": false,
+         "is_name_hidden": false,
+         "role": "user"
+      }
+   },
+   {
+      "id": "347900e0-8a64-4a7d-bc1d-114849bc1dbf",
+      "created_at": "2023-06-30T03:56:41.467Z",
+      "updated_at": "2023-06-30T04:04:22.861Z",
+      "external_id": "2589475843739457",
+      "account_number": "5684576857",
+      "name": "Bayu",
+      "status": "enabled",
+      "expiration_date": "2023-06-30T03:19:19.791Z",
+      "payment_method": {
+         "id": "075f0a42-4264-4b17-abf3-c3e42be2f0b9",
+         "created_at": "2023-06-30T01:41:41.096Z",
+         "updated_at": "2023-06-30T01:41:41.096Z",
+         "code": null,
+         "name": "GOPAY",
+         "type": "e-wallet",
+         "minimum_deposit": "25000.00",
+         "minimum_withdrawal": "120000.00",
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "http://example.com"
+      },
+      "user": {
+         "id": "e1296628-785a-43d8-8a83-012d33498453",
+         "created_at": "2023-06-30T01:40:21.537Z",
+         "updated_at": "2023-06-30T01:40:21.537Z",
+         "name": "Husain",
+         "phone_number": "62895704447600",
+         "balance": "0.00",
+         "profile_picture": null,
+         "is_fundraiser": false,
+         "is_name_hidden": false,
+         "role": "user"
+      }
+   }
+]
+```
+
+</details>
+
+### 3. Change password
+
+<details>
+<summary>post</summary>
+<br>
+/api/v1/profile/password
+<br>
+<br>
+
+**Body**
+
+```json
+{
+   "old_password": "17Kokomo#",
+   "new_password": "17Kokomo#",
+   "confirm_password": "17Kokomo#"
+}
+```
+
+**Response**
+
+```json
+OK
+```
+
+</details>
+
+### 4. Change phone
+
+<details>
+<summary>post</summary>
+<br>
+/api/v1/profile/phone
+<br>
+<br>
+
+**Body**
+
+```json
+{
+   "phone_number": "62895704447596",
+   "verification_code": "123456"
+}
+```
+
+**Response**
+
+```json
+OK
+```
+
+</details>
+
+### 4. Change Social media
+
+<details>
+<summary>post</summary>
+<br>
+/api/v1/profile/social-medias
+<br>
+<br>
+
+**Body**
+
+```json
+{
+   "website": "https://www.roisuladib.com",
+   "instagram": "https://www.instagram.com/adib_id/",
+   "youtube": "https://www.youtube.com/@adibid",
+   "facebook": "https://www.facebook.com/@adibid",
+   "twitter": "https://www.twitter.com/@adibid"
+}
+```
+
+**Response**
+
+```json
+OK
+```
+
+</details>
+
+## re-use API
+
+- API /get /api/v1/provinsi_list<br>
+
+**Details:** Endpoint ini digunakan untuk meminta data list provinsi pada
+kategori yang tersedia serta settingan yang lainya
+
+- API /get /api/v1/kabupaten_list<br>
+- API /get /api/v1/kecamatan_list<br>
+
+### API /get /api/v1/payment_methods
+
+<details>
+<summary> Details API payment_methods</summary>
+
+**Details:** Endpoint ini digunakan untuk meminta payment mothods yang tersedia
+
+**Response valid:**
+
+```json
+{
+   "data": [
+      {
+         "id": 1,
+         "method_code": "bank1",
+         "method_type": "bank",
+         "minimum_deposit": 1000.0,
+         "minimum_withdrawal": 500.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/bank1-logo.png"
+      },
+      {
+         "id": 2,
+         "method_code": "ewallet1",
+         "method_type": "e-wallet",
+         "minimum_deposit": 500.0,
+         "minimum_withdrawal": 100.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/ewallet1-logo.png"
+      },
+      {
+         "id": 3,
+         "method_code": "bank2",
+         "method_type": "bank",
+         "minimum_deposit": 2000.0,
+         "minimum_withdrawal": 1000.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/bank2-logo.png"
+      },
+      {
+         "id": 4,
+         "method_code": "ewallet2",
+         "method_type": "e-wallet",
+         "minimum_deposit": 100.0,
+         "minimum_withdrawal": 50.0,
+         "enable_deposit": true,
+         "enable_withdrawal": true,
+         "url_logo": "https://example.com/ewallet2-logo.png"
+      }
+   ]
+}
+```
+
+</details>
 
 ## Settings
 
