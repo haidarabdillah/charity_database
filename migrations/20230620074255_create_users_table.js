@@ -60,7 +60,7 @@ exports.up = function (knex) {
       table.string('profile_picture_url');
       table.string('vision_mission');
       table.string('background');
-      table.enum('verified', ['not_verified', 'personal', 'org']).defaultTo('pending');
+      table.enum('verified', ["pending",'personal', 'org']).defaultTo('pending');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
