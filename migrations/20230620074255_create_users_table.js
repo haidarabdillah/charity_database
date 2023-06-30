@@ -84,18 +84,13 @@ exports.up = function (knex) {
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
       table.string('org_name');
       table.string('tax_id');
+      table.string('doc_tax_id');
+      table.string('akta_number');
+      table.string('doc_akta');
       table.string('registration_number');
       table.string('address');
+      table.integer('desa_id').unsigned().notNullable().references('id').inTable('desa');
       table.enum('verification_status', ['pending', 'approved', 'rejected']).defaultTo('pending');
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-      table.timestamp('updated_at').defaultTo(knex.fn.now());
-    })
-    // Tabel "kyc_org_documents" untuk menyimpan dokumen-dokumen KYC organisasi
-    .createTable('kyc_org_documents', (table) => {
-      table.increments('document_id').primary();
-      table.integer('kyc_id').unsigned().references('fundraiser_kyc_org.kyc_id');
-      table.string('document_name');
-      table.string('file_path');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })

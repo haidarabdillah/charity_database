@@ -405,7 +405,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 **Response valid:**
 
   ```json
-    {
+   {
     "fundraiser_profile": {
       "user_id": 123,
       "profile_picture_url": "https://example.com/profile-picture.jpg",
@@ -416,14 +416,13 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         {
           "payment_method_id": 1,
           "account_number": "1234567890",
-          "account_name":"yayasan peduli sesama",
+          "account_name": "yayasan peduli sesama",
           "is_verified": true,
-
         },
         {
           "payment_method_id": 2,
           "account_number": "0987654321",
-          "account_name":"yayasan peduli sesama",
+          "account_name": "yayasan peduli sesama",
           "is_verified": false,
         }
       ],
@@ -435,18 +434,16 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         "facebook": "example_facebook",
         "twitter": "example_twitter"
       },
-      "kyc_personal":{
-      {
+      "kyc_personal": {
         "full_name": "John Doe",
         "id_number": "1234567890",
         "address": "123 Main Street, City",
         "photo_id_front": "https://example.com/photo-id-front.jpg",
         "photo_id_back": "https://example.com/photo-id-back.jpg",
         "selfie_photo": "https://example.com/selfie-photo.jpg",
-        "verification_status": "pending",
+        "verification_status": "success",
       },
-      "kyc_personal":{
-      {
+      "kyc_org": {
         "full_name": "John Doe",
         "id_number": "1234567890",
         "address": "123 Main Street, City",
@@ -454,8 +451,6 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         "photo_id_back": "https://example.com/photo-id-back.jpg",
         "selfie_photo": "https://example.com/selfie-photo.jpg",
         "verification_status": "pending",
-      }
-
       }
     }
   }
@@ -548,7 +543,83 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 ```json
 {
-  "": "081234567890"
+  "fundraiser_id": 123,
+  "full_name": "John Doe",
+  "id_number": "1234567890",
+  "address": "123 Main Street, City",
+  "desa_id": 211,
+  "photo_id_front": "photo-id-front.jpg",
+  "photo_id_back": "photo-id-back.jpg",
+  "selfie_photo": "selfie-photo.jpg"
+}
+```
+
+**Response valid:**
+
+```json
+{
+  "status": "success",
+  "message": "KYC verification request has been submitted successfully.",
+  "data": {
+    "verification_status": "pending"
+  }
+}
+```
+
+**Response notvalid:**
+
+```json
+{
+  "status": "error",
+  "message": "Ukuran file tidak sesuai dengan persyaratan.",
+  "errors": [
+    {
+      "field": "file",
+      "message": "Ukuran file harus antara 100KB hingga 10MB."
+    }
+  ]
+}
+```
+```json
+{
+  "status": "error",
+  "message": "Tipe file tidak sesuai dengan persyaratan.",
+  "errors": [
+    {
+      "field": "file",
+      "message": "Tipe file yang diunggah harus dalam format JPG, PNG, atau JPEG."
+    }
+  ]
+}
+
+```json
+{
+  "status": "error",
+  "message": "kelurahan is not valid",
+}
+```
+</details>
+
+#### API /post /api/v1/kyc-org
+<details>
+<summary> API /post /api/v1/kyc-org
+</summary>
+
+**Details:**
+  Endpoint ini digunakan untuk memverifikasi data KYC fundraiser
+
+**Request Body:**
+
+```json
+{
+  "fundraiser_id": 123,
+  "full_name": "John Doe",
+  "id_number": "1234567890",
+  "address": "123 Main Street, City",
+  "desa_id": 211,
+  "photo_id_front": "photo-id-front.jpg",
+  "photo_id_back": "photo-id-back.jpg",
+  "selfie_photo": "selfie-photo.jpg"
 }
 ```
 
@@ -564,14 +635,39 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 ```json
 {
-  "error": "Invalid phone number",
-  "message": "The provided phone number is not valid."
+  "status": "error",
+  "message": "Ukuran file tidak sesuai dengan persyaratan.",
+  "errors": [
+    {
+      "field": "file",
+      "message": "Ukuran file harus antara 100KB hingga 10MB."
+    }
+  ]
 }
 ```
+```json
+{
+  "status": "error",
+  "message": "Tipe file tidak sesuai dengan persyaratan.",
+  "errors": [
+    {
+      "field": "file",
+      "message": "Tipe file yang diunggah harus dalam format JPG, PNG, atau JPEG."
+    }
+  ]
+}
 
-
+```json
+{
+  "status": "error",
+  "message": "kelurahan is not valid",
+}
+```
 </details>
-- API /post /api/v1/kyc-org
+</details>
+
+
+
 - API /post /api/v1/bank
 - API /put /api/v1/bank
 - API /post /api/v1/campaign
