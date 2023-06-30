@@ -190,6 +190,14 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
+    .createTable('campaign_story', function (table) {
+      table.increments('id').primary();
+      table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
+      table.text('story_description').notNullable();
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+
     .createTable('donations', function (table) {
       table.increments('id').primary();
       table.decimal('amount', 10, 2).notNullable();

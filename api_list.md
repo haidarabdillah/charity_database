@@ -735,7 +735,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 ```
 </details>
 
-#### API /post /api/v1/kyc-org
+### 5. API /post /api/v1/kyc-org
 <details>
 <summary> API /post /api/v1/kyc-org
 </summary>
