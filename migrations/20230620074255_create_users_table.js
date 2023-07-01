@@ -194,6 +194,7 @@ exports.up = function (knex) {
     .createTable('campaign_story', function (table) {
       table.increments('id').primary();
       table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
+      table.string('url_image').notNullable();
       table.text('story_description').notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());

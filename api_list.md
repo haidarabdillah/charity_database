@@ -852,64 +852,23 @@ Endpoint digunakan untuk menambahkan data bank
          "verification_status": "pending"
       }
    },
-   "payment_methods": [
-      {
-         "id": 1,
-         "method_code": "bank1",
-         "method_type": "bank",
-         "minimum_deposit": 1000.0,
-         "minimum_withdrawal": 500.0,
-         "enable_deposit": true,
-         "enable_withdrawal": true,
-         "url_logo": "https://example.com/bank1-logo.png"
-      },
-      {
-         "id": 2,
-         "method_code": "ewallet1",
-         "method_type": "e-wallet",
-         "minimum_deposit": 500.0,
-         "minimum_withdrawal": 100.0,
-         "enable_deposit": true,
-         "enable_withdrawal": true,
-         "url_logo": "https://example.com/ewallet1-logo.png"
-      },
-      {
-         "id": 3,
-         "method_code": "bank2",
-         "method_type": "bank",
-         "minimum_deposit": 2000.0,
-         "minimum_withdrawal": 1000.0,
-         "enable_deposit": true,
-         "enable_withdrawal": true,
-         "url_logo": "https://example.com/bank2-logo.png"
-      },
-      {
-         "id": 4,
-         "method_code": "ewallet2",
-         "method_type": "e-wallet",
-         "minimum_deposit": 100.0,
-         "minimum_withdrawal": 50.0,
-         "enable_deposit": true,
-         "enable_withdrawal": true,
-         "url_logo": "https://example.com/ewallet2-logo.png"
-      }
-   ]
 }
 ```
 
 </details>
 
 ### 7. Update campaign
+### 8. Story campaign
 
 <details>
-<summary> Create a new Update campaign <br>
+<summary> Create a new Story campaign <br>
  </summary>
 
 <br>
-/api/v1/update-campaign
+/api/v1/update-story-campaign
 <br>
 <br>
-Endpoint digunakan untuk menambahkan data update campaign
+Endpoint digunakan untuk menambahkan 
 <br>
 <br>
 
@@ -917,10 +876,9 @@ Endpoint digunakan untuk menambahkan data update campaign
 
 ```json
 {
-   "update_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-   "update_type": "penyaluran",
+   "story_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+   "image": file image,
    "campaign_id": 123,
-   "fundraiser_withdrawal_id": 345
 }
 ```
 
@@ -928,23 +886,13 @@ Endpoint digunakan untuk menambahkan data update campaign
 
 ```json
 {
-   "update_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-   "update_type": "penyaluran",
-   "campaign": {
-      "id": "gwttw2-gwrt542-2twgw42-2452twrg",
-      "title": "Title campaign",
-      "description": "lorem ipsum dolor sit amet, consect",
-      "required_amount": "3232323.00",
-      "total_collected_amount": "3232323.00",
-      "total_withdrawn_amount": "3232323.00"
-   },
-   "fundraiser_withdrawal_id": 345
+  "message":"story has been updated"
 }
 ```
 
 </details>
 
-### 8. Withdrawals
+### 9. Withdrawals
 
 <details>
 <summary> Create a new withdrawals<br>
