@@ -466,7 +466,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
 
 </details>
 
-### 2. /post fundraiser profile 
+### 2. /post fundraiser profile
 
 <details>
 <summary> API /post /api/v1/fundraiser_profile <br>
@@ -685,6 +685,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
   ]
 }
 ```
+
 ```json
 {
   "status": "error",
@@ -703,9 +704,11 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
   "message": "kelurahan is not valid",
 }
 ```
+
 </details>
 
 ### 5. API /post /api/v1/kyc-org
+
 <details>
 <summary> API /post /api/v1/kyc-org
 </summary>
@@ -750,6 +753,7 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
   ]
 }
 ```
+
 ```json
 {
   "status": "error",
@@ -768,9 +772,9 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
   "message": "kelurahan is not valid",
 }
 ```
-</details>
-</details>
 
+</details>
+</details>
 
 ### 6. Bank
 
@@ -858,6 +862,7 @@ Endpoint digunakan untuk menambahkan data bank
 </details>
 
 ### 7. Update campaign
+
 ### 8. Story campaign
 
 <details>
@@ -868,7 +873,7 @@ Endpoint digunakan untuk menambahkan data bank
 /api/v1/update-story-campaign
 <br>
 <br>
-Endpoint digunakan untuk menambahkan 
+Endpoint digunakan untuk menambahkan
 <br>
 <br>
 
@@ -887,7 +892,7 @@ Endpoint digunakan untuk menambahkan
 ```json
 {
   "message":"story has been updated"
-}
+} 
 ```
 
 </details>
@@ -1179,8 +1184,7 @@ OK
 <details>
 <summary>post</summary>
 <br>
-/api/v1/profile/change_phone
-<br>
+/api/v1/profile/change_phone_otp
 <br>
 
 **Body**
@@ -1194,12 +1198,12 @@ OK
 
 **Response**
 
-
 ```json
 {
   "message": "Verification code has been sent to 62895704447596"
 }
 ```
+
 **Response notvalid:**
 
 ```json
@@ -1210,7 +1214,7 @@ OK
 ```
 
 <br>
-/api/v1/profile/change_phone
+/api/v1/profile/change_phone_verif
 <br>
 <br>
 
@@ -1225,7 +1229,6 @@ OK
 ```
 
 **Response**
-
 
 ```json
 {
