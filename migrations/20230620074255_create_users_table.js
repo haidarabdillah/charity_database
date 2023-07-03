@@ -1,5 +1,6 @@
 exports.up = function (knex) {
   return knex.schema
+    // table untuk calon donatur
     .createTable('users', function (table) {
       table.increments('id').primary();
       table.string('phone_number').unique().notNullable();
@@ -14,7 +15,7 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-    // Tabel "payment_methods" untuk menyimpan daftar bank yang valid untuk deposit dan withdrawal
+    // Tabel "payment_methods" untuk menyimpan daftar bank dan metode payment yang valid untuk deposit dan withdrawal bisa dikonfigurasi oleh admin dan bisa di cek berdasarkan worker xendit
     .createTable('payment_methods', function (table) {
       table.increments('id').primary();
       table.string('method_code');
@@ -26,6 +27,7 @@ exports.up = function (knex) {
       table.string('url_logo');
     })
 
+    // metode deposit untuk masing masing user sesuai api dalam xendit
     .createTable('deposit_methods', function (table) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().references('id').inTable('users');
@@ -39,7 +41,7 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-
+    // history deposit user sesuai dengan external id dari xendit
     .createTable('deposit_history', function (table) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().references('users.id');
@@ -53,7 +55,7 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-    // Skema untuk tabel fundraiser_profile
+    // tabel fundraiser_profile dengan skema user bisa menjadi personal dan organisasi, ini juga menjadi dasar dari public fundraiser data
     .createTable('fundraiser_profile', function (table) {
       table.increments('id').primary();
       table.integer('user_id').unsigned().references('id').inTable('users');
@@ -67,6 +69,7 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
+    // personal kyc untuk user dengan mencantumkan photo ktp selfie dan kk
     .createTable('fundraiser_kyc_personal', (table) => {
       table.increments('kyc_id').primary();
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
@@ -74,6 +77,7 @@ exports.up = function (knex) {
       table.string('address');
       table.string('photo_id_front');
       table.string('photo_id_back');
+      table.string('photo_kk');
       table.string('selfie_photo');
       table.enum('verification_status', ['pending', 'approved', 'rejected']).defaultTo('pending');
       table.timestamp('created_at').defaultTo(knex.fn.now());
@@ -123,29 +127,39 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
+    // skema untuk kategori dari campaigns
     .createTable('categories', function (table) {
       table.increments('id').primary();
       table.string('name').notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
+
+    // list provinsi yang tersedia
     .createTable('provinsi', function (table) {
       table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
       table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
     })
+
+    // list kabupaten yang tersedia
     .createTable('kabupaten', function (table) {
       table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
       table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
     })
+
+    // list kecamatan yang tersedia
     .createTable('kecamatan', function (table) {
       table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
       table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
     })
+
+    // list desa yang tersedia
     .createTable('desa', function (table) {
       table.string('id', 10).primary().collate('utf8mb4_general_ci').notNullable();
       table.string('nama', 32).collate('utf8mb4_general_ci').notNullable();
     })
-  
+
+    // campaigns data dengan penempatan desa_id untuk parameter lokasi serta ada langitude dan longitude untuk next step
     .createTable('campaigns', function (table) {
       table.increments('id').primary();
       table.string('title').notNullable();
@@ -156,21 +170,37 @@ exports.up = function (knex) {
       table.decimal('total_withdrawn_amount', 10, 2).notNullable();
       table.integer('category_id').unsigned().references('id').inTable('categories');
       table.integer('desa_id').unsigned().notNullable().references('id').inTable('desa');
+      table.float('longitude').notNullable();
+      table.float('latitude').notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-    .createTable('banners', function (table) {
+    // dokument yang diperlukan untuk verifikasi lanjutan ketika user membuat campaign baru eg. verifikasi data pasien
+    .createTable('campaigns_doc', function (table) {
       table.increments('id').primary();
+      table.string('title').notNullable();
+      table.string('url_doc').notNullable();
       table.integer('campaigns_id').unsigned().references('id').inTable('campaigns');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
+    // banner list untuk campaign
+    .createTable('banners', function (table) {
+      table.increments('id').primary();
+      table.string('link').notNullable();
+      table.integer('campaigns_id').unsigned().references('id').inTable('campaigns');
+      table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('updated_at').defaultTo(knex.fn.now());
+    })
+
+    // fundraiser request withdrawals 
     .createTable('fundraiser_withdrawals', function (table) {
       table.increments('id').primary();
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
       table.integer('campaigns_id').unsigned().references('id').inTable('campaigns');
+      table.integer('fundraiser_bank_accounts_id').unsigned().references('id').inTable('fundraiser_bank_accounts');
       table.decimal('amount', 10, 2).notNullable();
       table.string('status').notNullable();
       table.timestamp('requested_at').defaultTo(knex.fn.now());
@@ -180,7 +210,7 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
-
+    // fundraiser updates kontent setelah atau dalam masa campaigns berlangsung
     .createTable('campaign_updates', function (table) {
       table.increments('id').primary();
       table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
@@ -191,6 +221,7 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
+    // table untuk story campaign (feature seprti instastroy)
     .createTable('campaign_story', function (table) {
       table.increments('id').primary();
       table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
@@ -200,6 +231,7 @@ exports.up = function (knex) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
+    // table untuk transaksi calon donasi ketika melakukan donasin ke campaign
     .createTable('donations', function (table) {
       table.increments('id').primary();
       table.decimal('amount', 10, 2).notNullable();
@@ -209,7 +241,7 @@ exports.up = function (knex) {
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
-
+    // table untuk perhitungan static agar lebih mudah diakses frontend
     .createTable('statistics', function (table) {
       table.increments('id').primary();
       table.integer('total_donations').defaultTo(0);
