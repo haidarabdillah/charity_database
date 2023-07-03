@@ -429,7 +429,6 @@ Endpoint digunakan untuk mendapatkan detail fundraiser profile details, bank acc
         }
       ],
       "contacts": {
-        "id": 1,
         "website": "https://example.com",
         "instagram": "example_instagram",
         "youtube": "example_youtube",
@@ -882,7 +881,7 @@ Endpoint digunakan untuk menambahkan
 ```json
 {
    "story_description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-   "image": file image,
+   "image": url image,
    "campaign_id": 123,
 }
 ```
@@ -1318,7 +1317,7 @@ OK
 **Endpoint:**
 
   ```json
-  GET /api/campaign_list?category=pendidikan,tahfidz&deadline=true&fundraiser=org&minimum=1000000&maximum=10000000000&kabupaten=semarang
+  GET /api/campaign_list?category=pendidikan,tahfidz&deadline=true&fundraiser=org&minimum=1000000&maximum=10000000000&kabupaten=2334
   ```
 
 **Detail Field params**:

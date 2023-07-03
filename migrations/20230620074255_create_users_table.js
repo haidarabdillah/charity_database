@@ -35,7 +35,7 @@ exports.up = function (knex) {
       table.string('external_id');
       table.string('account_number');
       table.string('name');
-      table.string('status');
+      table.boolean('status');
       table.dateTime('expiration_date');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
@@ -73,12 +73,14 @@ exports.up = function (knex) {
     .createTable('fundraiser_kyc_personal', (table) => {
       table.increments('kyc_id').primary();
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
-      table.string('id_number');
-      table.string('address');
-      table.string('photo_id_front');
-      table.string('photo_id_back');
-      table.string('photo_kk');
-      table.string('selfie_photo');
+      table.string('id_number_ktp').notNullable();
+      table.string('id_number_kk').notNullable();
+      table.string('address').notNullable();
+      table.integer('id_desa').unsigned().notNullable();
+      table.string('photo_id_front').notNullable();
+      table.string('photo_id_back').notNullable();
+      table.string('photo_kk').notNullable();
+      table.string('selfie_photo').notNullable();
       table.enum('verification_status', ['pending', 'approved', 'rejected']).defaultTo('pending');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
@@ -90,10 +92,9 @@ exports.up = function (knex) {
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
       table.string('org_name');
       table.string('tax_id');
-      table.string('doc_tax_id');
       table.string('akta_number');
-      table.string('doc_akta');
-      table.string('registration_number');
+      table.string('url_tax_id');
+      table.string('url_akta');
       table.string('address');
       table.integer('desa_id').unsigned().notNullable().references('id').inTable('desa');
       table.enum('verification_status', ['pending', 'approved', 'rejected']).defaultTo('pending');
@@ -107,7 +108,7 @@ exports.up = function (knex) {
       table.string('account_number');
       table.string('account_name');
       table.integer('fundraiser_id').unsigned().references('id').inTable('fundraiser_profile');
-      table.boolean('is_verified').defaultTo(false);
+      table.enum('verification_status', ['pending', 'approved', 'rejected']).defaultTo('pending');
       table.integer('payment_methods_id').unsigned().references('id').inTable('payment_methods');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
@@ -168,11 +169,14 @@ exports.up = function (knex) {
       table.decimal('required_amount', 10, 2).notNullable();
       table.decimal('total_collected_amount', 10, 2).notNullable();
       table.decimal('total_withdrawn_amount', 10, 2).notNullable();
+      table.string('detail_required_amount').notNullable();
       table.integer('category_id').unsigned().references('id').inTable('categories');
       table.integer('desa_id').unsigned().notNullable().references('id').inTable('desa');
       table.float('longitude').notNullable();
       table.float('latitude').notNullable();
+      table.enum('verification_status', ['pending', 'approved', 'rejected', 'closed']).defaultTo('pending');
       table.timestamp('created_at').defaultTo(knex.fn.now());
+      table.timestamp('deadline_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
 
@@ -203,9 +207,9 @@ exports.up = function (knex) {
       table.integer('fundraiser_bank_accounts_id').unsigned().references('id').inTable('fundraiser_bank_accounts');
       table.decimal('amount', 10, 2).notNullable();
       table.string('status').notNullable();
-      table.timestamp('requested_at').defaultTo(knex.fn.now());
       table.timestamp('completed_at');
       table.string('external_id_transaction');
+      table.enum('verification_status', ['pending', 'approved', 'rejected', 'success', 'issue']).defaultTo('pending'); // pending awal, approved = approve admin, rejected=reject admin, success= setelah dikirim oleh xendit, issues= isu yang ada di xendit
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
@@ -213,6 +217,7 @@ exports.up = function (knex) {
     // fundraiser updates kontent setelah atau dalam masa campaigns berlangsung
     .createTable('campaign_updates', function (table) {
       table.increments('id').primary();
+      table.string('title').notNullable();
       table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
       table.enum('update_type', ['penyaluran', 'berita', 'withdraw']).notNullable();
       table.text('update_description').notNullable();

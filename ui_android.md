@@ -123,7 +123,7 @@ Beranda dari platform _Satu Nusa_ harus memberikan informasi yang cukup tentang 
       1. title
       2. deskripsi, markdown, user bisa upload berupa text dan foto, youtube  link dengan tumbnail
       3. nominal yang dibutuhkan dengan rincian. dengan konsep seperti table/kalkulasi sebagai contoh : kebutuhan pengobatan ,
-         - obat rawat jawal = 200.000
+         - obat rawat jalan = 200.000
          - biaya pembelian popok =  500.000
          - total =  700.000
 
