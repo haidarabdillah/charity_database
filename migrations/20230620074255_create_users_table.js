@@ -240,7 +240,7 @@ exports.up = function (knex) {
     .createTable('donations', function (table) {
       table.increments('id').primary();
       table.decimal('amount', 10, 2).notNullable();
-      table.integer('donor_id').unsigned().notNullable().references('id').inTable('users');
+      table.integer('user_id').unsigned().notNullable().references('id').inTable('users');
       table.integer('campaign_id').unsigned().notNullable().references('id').inTable('campaigns');
       table.text('comment');
       table.timestamp('created_at').defaultTo(knex.fn.now());
