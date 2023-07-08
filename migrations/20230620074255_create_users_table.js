@@ -10,6 +10,8 @@ exports.up = function (knex) {
       table.string('password_hash');
       table.decimal('balance', 10, 2).defaultTo(0);
       table.boolean('is_fundraiser').defaultTo(false);
+      table.boolean('is_org').defaultTo(false);
+      table.boolean('is_generated_va').defaultTo(false);
       table.enum('role', ['user', 'admin', 'sub-admin']).defaultTo('user');
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
@@ -132,6 +134,8 @@ exports.up = function (knex) {
     .createTable('categories', function (table) {
       table.increments('id').primary();
       table.string('name').notNullable();
+      table.string('icon').notNullable();
+      table.string('color').notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     })
