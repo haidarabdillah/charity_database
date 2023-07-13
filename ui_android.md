@@ -101,7 +101,6 @@ Beranda dari platform _Satu Nusa_ harus memberikan informasi yang cukup tentang 
       - ktp pengurus yayasan
       - akta pendirian yayasan
       - alamat dan geo map yayasan
-   - verifikasi bank account, bisa lebih dari satu bank dengan nama yang sama
    - Kontak dan Informasi Selengkapnya: Sediakan informasi kontak yang lengkap agar calon donatur dapat menghubungi penggalang dana untuk pertanyaan atau klarifikasi lebih lanjut. Juga, berikan tautan atau tombol yang mengarah ke halaman atau sumber lain yang memberikan informasi lebih lanjut tentang penggalang dana jika tersedia.
       - website ?
       - social media : ig, yt, facebook, twitter
